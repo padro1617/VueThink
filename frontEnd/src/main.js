@@ -26,7 +26,8 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 
 const router = new VueRouter({
   mode: 'history',
-  base: __dirname,
+  // base: __dirname,
+  base: '/admin/',
   routes
 })
 

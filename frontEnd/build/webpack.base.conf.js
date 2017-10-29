@@ -12,8 +12,8 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 // define the different HOST between development and production environment
-var DEV_HOST = JSON.stringify('http://localhost:80/')
-var PUB_HOST = JSON.stringify('http://localhost:80/')
+var DEV_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8080/')
+var PUB_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8080/')
 
 module.exports = {
   entry: {
