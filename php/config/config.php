@@ -55,7 +55,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 默认模块名
-    'default_module'         => 'admin',
+    'default_module'         => 'Home',
     // 禁止访问模块
     'deny_module_list'       => ['common'],
     // 默认控制器名
@@ -90,7 +90,7 @@ return [
     // 是否开启路由
     'url_route_on'           => true,
     // 路由配置文件（支持配置多个）
-    'route_config_file'      => ['route_admin'],
+    'route_config_file'      => ['route','route_admin'],
     // 是否强制使用路由
     'url_route_must'         => false,
     // 域名部署

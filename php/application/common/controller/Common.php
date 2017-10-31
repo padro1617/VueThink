@@ -17,6 +17,8 @@ class Common extends Controller
     {
         parent::_initialize();
         /*防止跨域*/      
+        //ob_start();
+        //header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
         header('Access-Control-Allow-Credentials: true');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');

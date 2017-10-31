@@ -58,5 +58,5 @@ return [
 	'admin/posts/enables' => ['admin/posts/enables', ['method' => 'POST']],
 	
 	// MISS路由
-	'__miss__'  => 'admin/base/miss',
+	//'__miss__'  => 'admin/base/miss',
 ];
