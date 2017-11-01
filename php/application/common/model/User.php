@@ -5,11 +5,12 @@
 // | Author: linchuangbin <linchuangbin@honraytech.com>
 // +----------------------------------------------------------------------
 
-namespace app\admin\model;
+namespace app\common\model;
 
 use think\Db;
-use app\admin\model\Common;
+use app\common\model\Common;
 use com\verify\HonrayVerify;
+use app\common\validate;
 
 class User extends Common 
 {	
@@ -56,9 +57,9 @@ class User extends Common
 		
 		$list = $this
 				->where($map)
-				->alias('user')
-				->join('__ADMIN_STRUCTURE__ structure', 'structure.id=user.structure_id', 'LEFT')
-				->join('__ADMIN_POST__ post', 'post.id=user.post_id', 'LEFT');
+				->alias('user');
+				//->join('__ADMIN_STRUCTURE__ structure', 'structure.id=user.structure_id', 'LEFT')
+				//->join('__ADMIN_POST__ post', 'post.id=user.post_id', 'LEFT');
 		
 		// 若有分页
 		if ($page && $limit) {
@@ -66,7 +67,7 @@ class User extends Common
 		}
 
 		$list = $list 
-				->field('user.*,structure.name as s_name, post.name as p_name')
+				->field('user.*')//,structure.name as s_name, post.name as p_name')
 				->select();
 		
 		$data['list'] = $list;
@@ -99,7 +100,7 @@ class User extends Common
 	public function createData($param)
 	{
 		if (empty($param['groups'])) {
-			$this->error = '请至少勾选一个用户组';
+			$this->error = '用户组类型参数丢失';
 			return false;
 		}
 
@@ -109,12 +110,12 @@ class User extends Common
 			$this->error = $validate->getError();
 			return false;
 		}
-
+		$newuid=0;
 		$this->startTrans();
 		try {
 			$param['password'] = user_md5($param['password']);
 			$this->data($param)->allowField(true)->save();
-
+			$newuid=$this->id;
 			foreach ($param['groups'] as $k => $v) {
 				$userGroup['user_id'] = $this->id;
 				$userGroup['group_id'] = $v;
@@ -123,7 +124,8 @@ class User extends Common
 			Db::name('admin_access')->insertAll($userGroups);
 
 			$this->commit();
-			return true;
+			return $newuid;
+//			return true;
 		} catch(\Exception $e) {
 			$this->rollback();
 			$this->error = '添加失败';

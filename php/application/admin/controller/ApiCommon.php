@@ -11,6 +11,7 @@ use think\Request;
 use think\Db;
 use app\common\adapter\AuthAdapter;
 use app\common\controller\Common;
+use app\common\model;
 
 
 class ApiCommon extends Common

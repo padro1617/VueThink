@@ -49,7 +49,7 @@
           realname: '',
           structure_id: null,
           remark: '',
-          groups: []
+          groups: [15]
         },
         orgsOptions: [],
         groupOptions: [],
@@ -64,7 +64,7 @@
           // ],
           realname: [
             { required: true, message: '请输入真实姓名' }
-          ],
+          ]
           // structure_id: [
           //   { required: true, message: '请选择用户部门' }
           // ]
@@ -87,11 +87,11 @@
         return temp
       },
       add(form) {
-        if (!this.selectCheckbox()) {
-          _g.toastMsg('warning', '请选择用户组')
-          return
-        }
-        console.log('res = ', _g.j2s(this.form))
+//        if (!this.selectCheckbox()) {
+//          _g.toastMsg('warning', '请选择用户组')
+//          return
+//        }
+//        console.log('res = ', _g.j2s(this.form))
         this.$refs.form.validate((pass) => {
           if (pass) {
             this.isLoading = !this.isLoading

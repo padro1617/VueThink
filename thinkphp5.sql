@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.53)
-# Date: 2017-11-01 08:28:58
+# Date: 2017-11-01 23:46:45
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -10,15 +10,14 @@
 
 CREATE TABLE `oa_admin_access` (
   `user_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL,
-  `puid_tcode` varchar(255) NOT NULL DEFAULT '' COMMENT '推广员ID或推广员的邀请码 0代表SEO'
+  `group_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Data for table "oa_admin_access"
 #
 
-INSERT INTO `oa_admin_access` VALUES (2,15,''),(4,17,'');
+INSERT INTO `oa_admin_access` VALUES (2,15),(4,17),(5,15),(6,15),(7,15);
 
 #
 # Structure for table "oa_admin_group"
@@ -72,6 +71,11 @@ INSERT INTO `oa_admin_menu` VALUES (52,0,'管理','','',1,0,1,59,'Administrative
 CREATE TABLE `oa_admin_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL COMMENT '岗位名称',
+  `logo` varchar(255) DEFAULT '' COMMENT '图片链接地址',
+  `maxmoney` int(11) NOT NULL DEFAULT '0' COMMENT '预估额度',
+  `fddays` int(11) NOT NULL DEFAULT '0' COMMENT '放贷天数',
+  `flday` varchar(255) NOT NULL DEFAULT '' COMMENT '日费率',
+  `limitday` varchar(255) NOT NULL DEFAULT '' COMMENT '贷款期限',
   `remark` varchar(200) DEFAULT NULL COMMENT '岗位备注',
   `create_time` int(11) DEFAULT NULL COMMENT '数据创建时间',
   `status` tinyint(5) DEFAULT '1' COMMENT '状态1启用,0禁用',
@@ -82,7 +86,7 @@ CREATE TABLE `oa_admin_post` (
 # Data for table "oa_admin_post"
 #
 
-INSERT INTO `oa_admin_post` VALUES (5,'后端开发工程师','',1484706862,1),(6,'前端开发工程师','',1484706863,1),(7,'设计师','',1484706863,1),(11,'文案策划','',1484706863,1),(12,'产品助理','',1484706863,1),(15,'总经理','',1484706863,1),(20,'项目经理','',1484706863,1),(25,'职能','',1484706863,1),(26,'项目助理','',1484706863,1),(27,'测试工程师','',1484706863,1),(28,'人事经理','',1484706863,1),(29,'CEO','',1484706863,1),(30,'品牌策划','',1484706863,1),(31,'前端研发工程师','',1484706863,1),(32,'后端研发工程师','',1484706863,1);
+INSERT INTO `oa_admin_post` VALUES (5,'后端开发工程师','',0,0,'','','',1484706862,1),(6,'前端开发工程师','',0,0,'','','',1484706863,1),(7,'设计师','',0,0,'','','',1484706863,1),(11,'文案策划','',0,0,'','','',1484706863,1),(12,'产品助理','',0,0,'','','',1484706863,1),(15,'总经理','',0,0,'','','',1484706863,1),(20,'项目经理','',0,0,'','','',1484706863,1),(25,'职能','',0,0,'','','',1484706863,1),(26,'项目助理','',0,0,'','','',1484706863,1),(27,'测试工程师','',0,0,'','','',1484706863,1),(28,'人事经理','',0,0,'','','',1484706863,1),(29,'CEO','',0,0,'','','',1484706863,1),(30,'品牌策划','',0,0,'','','',1484706863,1),(31,'前端研发工程师','',0,0,'','','',1484706863,1),(32,'后端研发工程师','',0,0,'','','',1484706863,1);
 
 #
 # Structure for table "oa_admin_postlog"
@@ -149,21 +153,24 @@ CREATE TABLE `oa_admin_user` (
   `username` varchar(100) DEFAULT NULL COMMENT '管理后台账号',
   `password` varchar(100) DEFAULT NULL COMMENT '管理后台密码',
   `phone` varchar(25) NOT NULL DEFAULT '' COMMENT '手机号码',
-  `remark` varchar(100) DEFAULT NULL COMMENT '用户备注',
-  `idcard` varchar(50) NOT NULL DEFAULT '' COMMENT '身份证号码',
-  `realname` varchar(100) DEFAULT NULL COMMENT '真实姓名',
-  `structure_id` int(11) DEFAULT NULL COMMENT '部门',
-  `post_id` int(11) DEFAULT NULL COMMENT '岗位',
-  `status` tinyint(3) DEFAULT NULL COMMENT '状态,1启用0禁用',
-  `create_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `remark` varchar(100) DEFAULT '' COMMENT '用户备注',
+  `idcard` varchar(50) DEFAULT '' COMMENT '身份证号码',
+  `bankcard` varchar(255) DEFAULT '' COMMENT '银行卡号',
+  `bankphone` varchar(25) DEFAULT '' COMMENT '银行预留手机号码',
+  `realname` varchar(100) DEFAULT '' COMMENT '真实姓名',
+  `tcode` varchar(11) NOT NULL DEFAULT '' COMMENT '推广码 注册用户为空字符',
+  `tuid` int(11) NOT NULL DEFAULT '0' COMMENT '所属推广员ID -1代表推广员 0代表来着网络',
+  `status` tinyint(3) DEFAULT '0' COMMENT '状态,1启用0禁用',
+  `create_time` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_phone_unique` (`phone`) COMMENT '电话号码唯一'
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "oa_admin_user"
 #
 
-INSERT INTO `oa_admin_user` VALUES (1,'admin','d93a5def7511da3d0f2d171d9c344e91','','','','超级管理员',1,5,1,NULL),(3,'用户AAAA','c78b6663d47cfbdb4d65ea51c104044e','','','','用户A',5,20,1,1487217060),(4,'hjhhadmin','07b01c3e0dab9ecab53c3d24df403ad1','','','','管理员',1,NULL,1,1509374223);
+INSERT INTO `oa_admin_user` VALUES (1,'admin','d93a5def7511da3d0f2d171d9c344e91','12527293425','','','','','超级管理员','1',5,1,NULL),(3,'用户AAAA','c78b6663d47cfbdb4d65ea51c104044e','13527242526','','','','','用户A','5',20,1,1487217060),(4,'hjhhadmin','07b01c3e0dab9ecab53c3d24df403ad1','13524262428','','','','','管理员','1',0,1,1509374223),(5,'aaaa','','','aaaa','','','','aaaa','',0,1,1509543592),(6,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293426','','','','','','',0,1,1509549125),(7,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293427','','','','','','',0,1,1509549713);
 
 #
 # Structure for table "oa_system_config"

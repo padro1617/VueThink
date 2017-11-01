@@ -5,9 +5,10 @@
 // | Author: linchuangbin <linchuangbin@honraytech.com>
 // +----------------------------------------------------------------------
 
-namespace app\admin\model;
+namespace app\common\model;
 
 use think\Model;
+use app\common\validate;
 
 class SystemConfig extends Model 
 {

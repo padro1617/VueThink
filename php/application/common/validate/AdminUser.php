@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\validate;
+namespace app\common\validate;
 use think\Validate;
 /**
 * 设置模型
@@ -8,9 +8,9 @@ use think\Validate;
 class AdminUser extends Validate{
 
 	protected $rule = array(
-		'username'  		=> 'require|length:6,12|unique:user',
-		'password'      	=> 'require',
-		'realname'      	=> 'require',
+		//'username'  		=> 'require|length:6,12|unique:user',
+		//'password'      	=> 'require',
+		//'realname'      	=> 'require',
 	);
 	protected $message = array(
 		'username.require'    	=> '用户名必须填写',

@@ -6,6 +6,7 @@
 // +----------------------------------------------------------------------
 
 namespace app\admin\controller;
+use app\common\model;
 
 class Groups extends ApiCommon
 {

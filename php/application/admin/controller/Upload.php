@@ -8,6 +8,7 @@ namespace app\admin\controller;
 
 use think\Request;
 use think\Controller;
+use app\common\model;
 
 class Upload extends Controller
 {   

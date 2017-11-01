@@ -10,6 +10,7 @@ namespace app\admin\controller;
 use com\verify\HonrayVerify;
 use app\common\controller\Common;
 use think\Request;
+use app\common\model;
 
 class Base extends Common
 {
