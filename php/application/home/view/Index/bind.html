@@ -1,0 +1,79 @@
+{extend name="layout" /}
+{block name="title"}小白现金{/block}
+{block name="css"}
+    <link href="/public/static/css/swiper.css" rel="stylesheet" type="text/css" />
+    <link href="/public/static/css/jquery.range.css" rel="stylesheet" type="text/css" />
+	<style>
+		.tip-yellowsimple{color: #555!important;left:170px!important;margin-top:20px;}
+	</style>
+{/block}
+
+{block name="content"}
+
+	<section class="bind-form">
+		<div class="item">
+			<span class="left">姓名</span>
+			<input type="text" class="text j-name"  name="t1" valType="required" msg="<font color=red>*</font>姓名不能为空"  placeholder="请填写真实姓名">
+		</div>
+		<div class="item">
+			<span class="left">身份证号码</span>
+			<input type="text" class="text j-card"  name="t2" valType="IDENTITY" msg="<font color=red>*</font>身份证号码格式不正确"  placeholder="请填写身份证号码">
+		</div>
+		<div class="item">
+			<span class="left">银行卡号</span>
+			<input type="text" class="text j-bank" name="t1" valType="required" msg="<font color=red>*</font>银行卡号不能为空"  placeholder="请填写银行卡号">
+		</div>
+		<div class="item">
+			<span class="left">预留手机号</span>
+			<input type="text" class="text j-phone"  name="t2" valtype="MOBILE" msg="<font color=red>*</font>手机格式不正确"  placeholder="请填写银行预留手机号">
+		</div>
+		<div class="item">
+			<span class="left">验证码</span>
+			<input type="text" class="text j-code" style="width:90px;" placeholder="请输入验证码">
+			<a href="javascript:;" class="get-code">获取验证码</a>
+		</div>
+		<div class="tip">
+			* 请确保您填写的是本人真实信息，否则会导致放款不了哦
+		</div>
+		<center>
+			<a href="javascript:;" class="bind-btn">完成绑定</a>
+		</center>
+	</section>
+
+
+	{/block}
+	
+			{block name="bodyjs"}
+
+<script type="text/javascript" src="/public/static/js/fastclick.js"></script>
+<script type="text/javascript" src="/public/static/js/index.js"></script>
+<script type="text/javascript" src="/public/static/js/jquery.poshytip.js"></script>
+<script type='text/javascript' src='/public/static/js/jq.validate.js'></script>
+
+<script type="text/javascript">
+	$(function (e) {
+		var vali = new Validators();
+		//$("#btn").bind("click", vali.subByJs);
+		$('.bind-btn').click(function () {
+			var _phone = $('.j-phone').val();
+			var _card = $('.j-card').val();
+			var _bank = $('.j-bank').val();
+			var _name = $('.j-name').val();
+			var _code = $('.j-code').val();
+
+			if(!_phone || !_card || !_bank || !_name || !_code){
+				alert('请完整填写所有信息！')
+				return;
+			}
+
+			if (_phone.length != 11) {
+				alert('请输入正确手机号码');
+				return;
+			}
+
+			location.href = 'tips.html'
+		})
+	});
+</script>
+
+{/block}

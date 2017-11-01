@@ -1,0 +1,78 @@
+{extend name="layout" /}
+{block name="title"}小白现金{/block}
+{block name="css"}
+    <link href="/public/static/css/swiper.css" rel="stylesheet" type="text/css" />
+    <link href="/public/static/css/jquery.range.css" rel="stylesheet" type="text/css" />
+{/block}
+
+{block name="headjs"}
+
+{/block}
+{block name="content"}
+		
+		<section class="limit-title">
+			<img src="images/limit-title.png">
+		</section>
+
+		<section class="limit-line">
+				<input type="hidden" class="single-slider" value="10000" /> 
+		</section>
+
+		<section class="limit-line">
+				<input type="hidden" class="single-slider-day" value="90" /> 
+		</section>
+
+		<section class="limit-number">
+			<div class="left">
+				借款金额
+				<div><span id="moeny-munber">10000</span>.00元</div>
+			</div>
+			<div class="right">
+				借款天数
+				<div><span id="day-munber">90</span>天</div>
+			</div>
+		</section>
+
+		<section class="limit-link">
+			<a href="bind.html">立即提现</a>
+		</section>
+
+		
+        {/block}
+		
+				{block name="bodyjs"}
+
+	<script type="text/javascript" src="/public/static/js/fastclick.js"></script>
+	<script type="text/javascript" src="/public/static/js/index.js"></script>
+	<script type="text/javascript" src="/public/static/js/jquery.range.js"></script>
+	<script type="text/javascript" src="/public/static/js/swiper.jquery.min.js"></script>
+	<script>
+	 $('.single-slider').jRange({ 
+        from: 1000, //滑动范围的最小值，数字，如0 
+        to: 10000, //滑动范围的最大值，数字，如100 
+        step: 1000,//步长值，每次滑动大小 
+        scale: ['1000元', '10000元'],//滑动条下方的尺度标签，数组类型，如[0,50,100] 
+        format: '%s',//数值格式 
+        width: 250, //滑动条宽度 
+        showLabels: true,// 是否显示滑动条下方的尺寸标签 
+		showScale: true,//是否显示滑块上方的数值标签 
+		onstatechange: function() {
+			$('#moeny-munber').html(this.options.value)
+		}
+	}); 
+	$('.single-slider-day').jRange({ 
+        from: 30, //滑动范围的最小值，数字，如0 
+        to: 90, //滑动范围的最大值，数字，如100 
+        step: 1,//步长值，每次滑动大小 
+        scale: ['30天', '90天'],//滑动条下方的尺度标签，数组类型，如[0,50,100] 
+        format: '%s',//数值格式 
+        width: 250, //滑动条宽度 
+        showLabels: false,// 是否显示滑动条下方的尺寸标签 
+		showScale: true, //是否显示滑块上方的数值标签 
+		onstatechange: function() {
+			$('#day-munber').html(this.options.value)
+		}
+	}); 
+	
+    </script>
+        {/block}
