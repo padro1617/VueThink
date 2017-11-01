@@ -1,3 +1,4 @@
 /php/runtime
 /frontEnd/dist
 /frontEnd/node_modules
+/.vscode
