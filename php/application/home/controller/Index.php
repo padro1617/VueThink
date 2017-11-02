@@ -248,7 +248,7 @@ class Index extends Common
             //session 防刷数据
             $param = $this->param;
             $postid      = $param['postid'];
-            $skey='platform_click';
+            $skey='platform_click_'.$postid;
             $c=session($skey);
             if($c && $c['last_time']>0 && $c['postid']==$postid){
                 //计算超时时间 1509545004  10分钟内有效

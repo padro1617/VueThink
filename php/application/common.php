@@ -68,9 +68,9 @@ function is_login()
  */
 function set_phonecode($phone,$code){
     if(is_null($code) || empty($code)){
-        session('user_phoneverifycode',null);
+        session('user_phoneverifycode'.$phone,null);
     }else{
-        session('user_phoneverifycode',array('data' => $code,'phone'=>$phone, 'last_time' => time()));
+        session('user_phoneverifycode'.$phone,array('data' => $code, 'last_time' => time()));
     }
 }
 /**
@@ -78,8 +78,8 @@ function set_phonecode($phone,$code){
  * @param $code
  */
 function get_phonecode($phone){
-    $c=session('user_phoneverifycode');
-    if($c && $c['last_time']>0 && $c['phone']==$phone){
+    $c=session('user_phoneverifycode'.$phone);
+    if($c && $c['last_time']>0){
         //计算超时时间 1509545004  1小时内有效
         if(time()-$c['last_time']<1800){
             return $c['data'];
