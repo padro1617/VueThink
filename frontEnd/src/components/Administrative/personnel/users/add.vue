@@ -1,20 +1,26 @@
 <template>
 	<div class="m-l-50 m-t-30 w-500">
 		<el-form ref="form" :model="form" :rules="rules" label-width="130px">
-			<el-form-item label="用户名" prop="username">
-				<el-input v-model.trim="form.username" class="h-40 w-200" :maxlength=12></el-input>
-			</el-form-item>
-			<el-form-item label="密码" prop="password">
-				<el-input v-model.trim="form.password" class="h-40 w-200"></el-input>
-			</el-form-item>
-			<el-form-item label="真实姓名" prop="realname">
-				<el-input v-model.trim="form.realname" class="h-40 w-200"></el-input>
-			</el-form-item>
-			<!-- <el-form-item label="部门" prop="structure_id">
-				<el-select v-model="form.structure_id" placeholder="请选择部门" class="w-200">
-					<el-option v-for="item in orgsOptions" :label="item.title" :value="item.id"></el-option>
-				</el-select>
-			</el-form-item> -->
+            <!--<el-form-item label="用户名" prop="username">
+                <el-input v-model.trim="form.username" class="h-40 w-200" :maxlength=12></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+                <el-input v-model.trim="form.password" class="h-40 w-200"></el-input>
+            </el-form-item>
+             <el-form-item label="部门" prop="structure_id">
+                <el-select v-model="form.structure_id" placeholder="请选择部门" class="w-200">
+                    <el-option v-for="item in orgsOptions" :label="item.title" :value="item.id"></el-option>
+                </el-select>
+            </el-form-item> -->
+            <el-form-item label="姓名" prop="realname">
+                <el-input v-model.trim="form.realname" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="专属ID" prop="tcode">
+                <el-input v-model.trim="form.tcode" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号" prop="phone">
+                <el-input v-model.trim="form.phone" class="h-40 w-200"></el-input>
+            </el-form-item>
 			<el-form-item label="备注">
 				<el-input v-model.trim="form.remark" class="h-40 w-200"></el-input>
 			</el-form-item>
@@ -44,10 +50,12 @@
       return {
         isLoading: false,
         form: {
-          username: '',
-          password: '',
+          username: '推广员',
+          password: '123456',
           realname: '',
-          structure_id: null,
+          tcode: '',
+          tuid: '-1',
+          phone: '',
           remark: '',
           groups: [15]
         },
@@ -56,14 +64,17 @@
         selectedGroups: [],
         selectedIds: [],
         rules: {
-          username: [
-            { required: true, message: '请输入用户名' }
-          ],
+//          username: [
+//            { required: true, message: '请输入用户名' }
+//          ],
           // password: [
           //   { required: true, message: '请输入用户密码' }
           // ],
           realname: [
             { required: true, message: '请输入真实姓名' }
+          ],
+          tcode: [
+              { required: true, message: '请输入专属ID' }
           ]
           // structure_id: [
           //   { required: true, message: '请选择用户部门' }
@@ -72,20 +83,20 @@
       }
     },
     methods: {
-      selectCheckbox() {
-        let temp = false
-        _(this.groupOptions).forEach((res) => {
-          if (this.selectedGroups.toString().indexOf(res.title) > -1) {
-            this.selectedIds.push(res.id)
-          }
-        })
-        if (this.selectedIds.length) {
-          this.form.groups = _.cloneDeep(this.selectedIds)
-          temp = true
-        }
-        this.selectedIds = []
-        return temp
-      },
+//      selectCheckbox() {
+//        let temp = false
+//        _(this.groupOptions).forEach((res) => {
+//          if (this.selectedGroups.toString().indexOf(res.title) > -1) {
+//            this.selectedIds.push(res.id)
+//          }
+//        })
+//        if (this.selectedIds.length) {
+//          this.form.groups = _.cloneDeep(this.selectedIds)
+//          temp = true
+//        }
+//        this.selectedIds = []
+//        return temp
+//      },
       add(form) {
 //        if (!this.selectCheckbox()) {
 //          _g.toastMsg('warning', '请选择用户组')
@@ -126,7 +137,7 @@
     },
     created() {
       this.getAllGroups()
-      this.getAllOrgs()
+//      this.getAllOrgs()
     },
     mixins: [http, fomrMixin]
   }

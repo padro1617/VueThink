@@ -11,7 +11,7 @@
 {block name="content"}
 
 		<section class="regedit-title">
-			<img src="public/static/images/regedit-title.png">
+			<img src="/public/static/images/regedit-title.png">
 		</section>
 
 		<section class="regedit-form">
@@ -94,7 +94,7 @@
 				return;
 			}
 			//获取推广码 ?t=100
-			var _tcode=getQueryString('t');
+			var _tcode='{$tcode}';
 			$.post('/',{phone:_phone,code:_code,tcode:_tcode},function(d){
 				if(d && d.code==200){
 					//发送成功 成功

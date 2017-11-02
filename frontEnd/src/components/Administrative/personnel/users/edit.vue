@@ -1,7 +1,7 @@
 <template>
 	<div class="m-l-50 m-t-30 w-500">
 		<el-form ref="form" :model="form" :rules="rules" label-width="130px">
-			<el-form-item label="用户名" prop="username">
+			<!--<el-form-item label="用户名" prop="username">
 				<el-input v-model.trim="form.username" class="h-40 w-200" :maxlength=12 :disabled="true"></el-input>
 			</el-form-item>
 			<el-form-item label="密码">
@@ -22,7 +22,19 @@
 				<el-checkbox-group v-model="selectedGroups">
 					<el-checkbox v-for="item in groupOptions" :label="item.else" class="form-checkbox"></el-checkbox>
 				</el-checkbox-group>
-			</el-form-item>
+			</el-form-item>-->
+            <el-form-item label="姓名" prop="realname">
+                <el-input v-model.trim="form.realname" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="专属ID" prop="tcode">
+                <el-input v-model.trim="form.tcode" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号" prop="phone">
+                <el-input v-model.trim="form.phone" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="备注">
+                <el-input v-model.trim="form.remark" class="h-40 w-200"></el-input>
+            </el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="add()" :loading="isLoading">提交</el-button>
 				<el-button @click="goback()">返回</el-button>
@@ -45,11 +57,11 @@
         isLoading: false,
         id: null,
         form: {
-          username: '',
           realname: '',
-          structure_id: null,
+          tcode: '',
+          phone: '',
           remark: '',
-          groups: []
+          groups: [15]
         },
         password: '',
         orgsOptions: [],
@@ -57,33 +69,39 @@
         selectedGroups: [],
         selectedIds: [],
         rules: {
-          username: [
-            { required: true, message: '请输入用户名' }
-          ],
           realname: [
-            { required: true, message: '请输入真实姓名' }
+             { required: true, message: '请输入真实姓名' }
           ],
-          structure_id: [
-            { required: true, message: '请选择用户所属组织架构' }
+          tcode: [
+              { required: true, message: '请输入专属ID' }
           ]
+//          username: [
+//            { required: true, message: '请输入用户名' }
+//          ],
+//          realname: [
+//            { required: true, message: '请输入真实姓名' }
+//          ],
+//          structure_id: [
+//            { required: true, message: '请选择用户所属组织架构' }
+//          ]
         }
       }
     },
     methods: {
-      selectCheckbox() {
-        let temp = false
-        _(this.groupOptions).forEach((res) => {
-          if (this.selectedGroups.toString().indexOf(res.else) > -1) {
-            this.selectedIds.push(res.id)
-          }
-        })
-        if (this.selectedIds.length) {
-          this.form.groups = _.cloneDeep(this.selectedIds)
-          temp = true
-        }
-        this.selectedIds = []
-        return temp
-      },
+//      selectCheckbox() {
+//        let temp = false
+//        _(this.groupOptions).forEach((res) => {
+//          if (this.selectedGroups.toString().indexOf(res.else) > -1) {
+//            this.selectedIds.push(res.id)
+//          }
+//        })
+//        if (this.selectedIds.length) {
+//          this.form.groups = _.cloneDeep(this.selectedIds)
+//          temp = true
+//        }
+//        this.selectedIds = []
+//        return temp
+//      },
       add() {
         // _(this.groupOptions).forEach((res) => {
         //   console.log(this.selectedGroups.toString().indexOf(res.else))
@@ -95,11 +113,11 @@
         // console.log('selectedGroups = ', _g.j2s(this.selectedGroups))
         // console.log('selectedIds = ', _g.j2s(this.selectedIds))
 
-        if (!this.selectCheckbox()) {
-          _g.toastMsg('warning', '请选择用户组')
-          return
-        }
-        console.log('selectedIds = ', _g.j2s(this.selectedIds))
+//        if (!this.selectCheckbox()) {
+//          _g.toastMsg('warning', '请选择用户组')
+//          return
+//        }
+//        console.log('selectedIds = ', _g.j2s(this.selectedIds))
         this.$refs.form.validate((pass) => {
           if (pass) {
             this.isLoading = !this.isLoading
@@ -142,23 +160,26 @@
           })
         })
       },
+        /*
+         //this.getAllOrgs()
+         //this.groupOptions = await this.getAllGroups()
+         */
       async getCompleteData() {
-        this.getAllOrgs()
-        this.groupOptions = await this.getAllGroups()
         this.apiGet('admin/users/' + this.id).then((res) => {
           console.log('res = ', _g.j2s(res))
+      //      this.form.username = data.username
           this.handelResponse(res, (data) => {
-            this.form.username = data.username
             this.form.realname = data.realname
-            this.form.structure_id = data.structure_id
+            this.form.tcode = data.tcode
+            this.form.phone = data.phone
             this.form.remark = data.remark
-            _(data.groups).forEach((res1) => {
-              _(this.groupOptions).forEach((res2) => {
-                if (res1.title == res2.else) {
-                  this.selectedGroups.push(res1.title)
-                }
-              })
-            })
+//            _(data.groups).forEach((res1) => {
+//              _(this.groupOptions).forEach((res2) => {
+//                if (res1.title == res2.else) {
+//                  this.selectedGroups.push(res1.title)
+//                }
+//              })
+//            })
           })
         })
       }

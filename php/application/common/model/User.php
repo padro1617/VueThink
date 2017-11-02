@@ -44,30 +44,40 @@ class User extends Common
      * @param     [number]                   $limit    [t每页数量]
      * @return    [array]                             [description]
      */
-	public function getDataList($keywords, $page, $limit)
+	public function getDataList($keywords, $page, $limit,$tuid)
 	{
 		$map = [];
 		if ($keywords) {
 			$map['username|realname'] = ['like', '%'.$keywords.'%'];
 		}
-
+		if($tuid=='-1'){
+			$map['user.tuid'] = array('eq', $tuid);
+		}else{
+			$map['user.tuid'] = array('gt', -1);
+		}
 		// 默认除去超级管理员
-		$map['user.id'] = array('neq', 1);
+		$map['user.id'] = array('gt', 10);
 		$dataCount = $this->alias('user')->where($map)->count('id');
 		
 		$list = $this
 				->where($map)
-				->alias('user');
+				->alias('user')
+				->join(array('oa_admin_user'=>'u', false), 'u.id=user.tuid', 'LEFT');
 				//->join('__ADMIN_STRUCTURE__ structure', 'structure.id=user.structure_id', 'LEFT')
 				//->join('__ADMIN_POST__ post', 'post.id=user.post_id', 'LEFT');
-		
+
 		// 若有分页
 		if ($page && $limit) {
 			$list = $list->page($page, $limit);
 		}
-
+		if($tuid=='-1'){
+			$list = $list->field('user.*');
+		}else{
+			$list = $list->field('user.*,u.realname as trealname');
+		}
 		$list = $list 
-				->field('user.*')//,structure.name as s_name, post.name as p_name')
+				//->field('user.*')//,structure.name as s_name, post.name as p_name')
+				->order('user.id desc,user.status desc')
 				->select();
 		
 		$data['list'] = $list;

@@ -11,6 +11,8 @@
 return [
 // 【基础】登录
     '/' => ['home/index/index', ['method' => 'GET|POST|OPTIONS']],
+//推广的链接地址
+    't/:tcode' => ['home/index/index', ['method' => 'GET|POST|OPTIONS']],
     'logout' => ['home/index/logout', ['method' => 'GET|OPTIONS']],
     'smsapi' => ['home/index/smsapi', ['method' => 'POST|OPTIONS']],
     'limit' => ['home/index/limit', ['method' => 'GET|POST|OPTIONS']],

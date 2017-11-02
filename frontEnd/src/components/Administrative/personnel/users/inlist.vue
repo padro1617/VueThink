@@ -1,13 +1,8 @@
 <template>
 	<div>
 		<div class="m-b-20 ovf-hd">
-			<div class="fl" v-show="addShow">
-				<router-link class="btn-link-large add-btn" to="add">
-					<i class="el-icon-plus"></i>&nbsp;&nbsp;添加推广员
-				</router-link>
-			</div>
 			<div class="fl w-200 m-l-30">
-				<el-input placeholder="请输入推广员姓名" v-model="keywords">
+				<el-input placeholder="请输入注册用户姓名" v-model="keywords">
 					<el-button slot="append" icon="search" @click="search()"></el-button>
 				</el-input>
 			</div>
@@ -23,18 +18,34 @@
 			<el-table-column
 			label="姓名"
 			prop="realname"
-			width="150">
+			width="100">
 			</el-table-column>
             <el-table-column
-                    prop="tcode"
-                    label="专属ID"
-                    width="150">
+                    prop="trealname"
+                    label="推广员"
+                    width="100">
             </el-table-column>
             <el-table-column
                     prop="phone"
                     label="手机"
                     width="150">
             </el-table-column>
+            <el-table-column
+                    prop="idcard"
+                    label="身份证号"
+                    width="250">
+            </el-table-column>
+            <el-table-column
+                    prop="bankcard"
+                    label="银行卡号"
+                    width="250">
+            </el-table-column>
+            <el-table-column
+                    prop="bankphone"
+                    label="预留手机"
+                    width="150">
+            </el-table-column>
+
 			<!--<el-table-column-->
 			<!--label="状态"-->
 			<!--width="80">-->
@@ -44,10 +55,10 @@
           <!--</div>-->
         <!--</template>-->
 			<!--</el-table-column>-->
-            <el-table-column
-                    label="备注"
-                    prop="remark">
-            </el-table-column>
+            <!--<el-table-column-->
+                    <!--label="备注"-->
+                    <!--prop="remark">-->
+            <!--</el-table-column>-->
 			<el-table-column
 			label="操作"
 			width="250">
@@ -138,7 +149,7 @@
             keywords: this.keywords,
             page: this.currentPage,
             limit: this.limit,
-            tuid: -1
+            tuid: 0
           }
         }
         this.apiGet('admin/users', data).then((res) => {

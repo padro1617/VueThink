@@ -16,9 +16,11 @@ class Users extends ApiCommon
         $userModel = model('User');
         $param = $this->param;
         $keywords = !empty($param['keywords']) ? $param['keywords']: '';
+        //-1代表推广员 0代表来着网络
+        $tuid =  $param['tuid'];
         $page = !empty($param['page']) ? $param['page']: '';
         $limit = !empty($param['limit']) ? $param['limit']: '';    
-        $data = $userModel->getDataList($keywords, $page, $limit);
+        $data = $userModel->getDataList($keywords, $page, $limit,$tuid);
         return resultArray(['data' => $data]);
     }
 

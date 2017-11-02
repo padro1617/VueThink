@@ -40,7 +40,7 @@ class Post extends Common
 			// 默认除去无效记录
 			$map['status'] = array('eq', 1);
 		}
-		$data = $this->where($map)->select();
+		$data = $this->where($map)->order('id desc,status desc')->select();
 		return $data;
 	}
 }

@@ -29,7 +29,7 @@ class Index extends Common
      * 短信验证码
      * $date=date('Y-m-d H:i:s',"1285724523");
      */
-    public function index(){
+    public function index($tcode=''){
         if(Request::instance()->isPost()){
             $userModel = model('User');
             $param = $this->param;
@@ -55,7 +55,7 @@ class Index extends Common
                 //获取推广码
                 $tcode = $param['tcode'];
                 $tuid=0;//推广员ID  -1代表推广员 0代表来着网络
-                if(!empty($tcode)){
+                if(!empty($tcode) && $tcode!='0'){
                     //查询推广员的ID
                     $t_userinfo=$userModel->where(array('tcode'=>$tcode))->find();
                     if($userinfo!=Null) {
@@ -100,6 +100,7 @@ class Index extends Common
                 $this->redirect('home/Index/limit');
             }
         }
+        $this->assign('tcode',$tcode);
         return view();
     }
     /*

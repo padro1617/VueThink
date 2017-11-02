@@ -2,7 +2,7 @@
 	<div>
 		<div class="m-b-20">
 			<router-link class="btn-link-large add-btn" to="add">
-				<i class="el-icon-plus"></i>&nbsp;&nbsp;添加岗位
+				<i class="el-icon-plus"></i>&nbsp;&nbsp;添加借款平台
 			</router-link>
 		</div>
 		<el-table
@@ -14,14 +14,30 @@
 			width="50">
 			</el-table-column>
 			<el-table-column
-			label="岗位名称"
+			label="平台名称"
 			prop="name">
 			</el-table-column>
-			<el-table-column
-			label="备注"
-			prop="remark">
-			</el-table-column>
-			<el-table-column
+            <el-table-column
+                    label="预估额度"
+                    prop="maxmoney">
+            </el-table-column>
+            <el-table-column
+                    label="放贷天数"
+                    prop="fddays">
+            </el-table-column>
+            <el-table-column
+                    label="日费率"
+                    prop="flday">
+            </el-table-column>
+            <el-table-column
+                    label="贷款期限"
+                    prop="limitday">
+            </el-table-column>
+            <el-table-column
+                    label="链接地址"
+                    prop="squrl">
+            </el-table-column>
+			<!--<el-table-column
 			label="状态"
       prop="status"
 			width="100">
@@ -31,6 +47,10 @@
           </div>
         </template>
 			</el-table-column>
+            <el-table-column
+                    label="备注"
+                    prop="remark">
+            </el-table-column>-->
 			<el-table-column
 			label="操作"
 			width="200">
@@ -53,9 +73,9 @@
         </template>
 			</el-table-column>
 		</el-table>
-		<div class="pos-rel p-t-20">
+		<!--<div class="pos-rel p-t-20">
 			<btnGroup :selectedData="multipleSelection" :type="'posts'"></btnGroup>
-		</div>
+		</div>-->
 	</div>
 </template>
 

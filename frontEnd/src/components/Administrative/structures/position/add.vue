@@ -1,9 +1,39 @@
 <template>
 	<div class="m-l-50 m-t-30 w-900">
+        <div style="color:gray;font-size:14px;">
+            <ul>
+                <li style="list-style: initial;">上传logo使用淘宝旗下的免费图片存储平台</li>
+                <li style="list-style: initial;">淘宝图片存储具备CDN加速，图片访问更快</li>
+            </ul>
+            <ul>
+                <li style="list-style: initial;">用淘宝账号登陆后新建一个命名空间，</li>
+                <li style="list-style: initial;">点击上传按钮，可上传图片</li>
+                <li style="list-style: initial;">复制访问链接地址填写到logo输入框中</li>
+            </ul>
+        </div>
 		<el-form ref="form" :model="form" :rules="rules" label-width="130px">
-			<el-form-item label="岗位名称" prop="name">
+			<el-form-item label="平台名称" prop="name">
 				<el-input v-model.trim="form.name" class="h-40 w-200"></el-input>
 			</el-form-item>
+            <el-form-item label="logo图片" prop="logo">
+                <el-input v-model.trim="form.logo" class="h-40 w-200" placeholder="http://xxx.jpg"></el-input>
+                <a href="http://wantu.taobao.com/mediaportal/index.htm" target="_blank" class="btn-link el-button el-button--success">上传图片 注册后点击[立即使用]</a>
+            </el-form-item>
+            <el-form-item label="预估额度" prop="maxmoney">
+                <el-input v-model.trim="form.maxmoney" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="放贷天数" prop="fddays">
+                <el-input v-model.trim="form.fddays" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="日费率" prop="flday">
+                <el-input v-model.trim="form.flday" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="贷款期限" prop="limitday">
+                <el-input v-model.trim="form.limitday" class="h-40 w-200"></el-input>
+            </el-form-item>
+            <el-form-item label="链接地址" prop="squrl">
+                <el-input v-model.trim="form.squrl" class="h-40 w-200" placeholder="http://xxx"></el-input>
+            </el-form-item>
 			<el-form-item label="备注">
         <el-input
           type="textarea"
@@ -30,11 +60,17 @@
         isLoading: false,
         form: {
           name: '',
+          logo: '',
+          fddays: 0,
+          flday: '0.5',
+          maxmoney: 0,
+          limitday: '',
+          squrl: '',
           remark: ''
         },
         rules: {
           name: [
-            { required: true, message: '请输入岗位名称', trigger: 'blur' }
+            { required: true, message: '请输入平台名称', trigger: 'blur' }
           ]
         }
       }

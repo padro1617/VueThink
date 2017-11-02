@@ -17,6 +17,7 @@ import structuresEdit from './components/Administrative/structures/structures/ed
 import groupsList from './components/Administrative/structures/groups/list.vue'
 import groupsAdd from './components/Administrative/structures/groups/add.vue'
 import groupsEdit from './components/Administrative/structures/groups/edit.vue'
+import usersInlist from './components/Administrative/personnel/users/inlist.vue'
 import usersList from './components/Administrative/personnel/users/list.vue'
 import usersAdd from './components/Administrative/personnel/users/add.vue'
 import usersEdit from './components/Administrative/personnel/users/edit.vue'
@@ -30,6 +31,7 @@ import usersEdit from './components/Administrative/personnel/users/edit.vue'
 
 const routes = [
   { path: '/', component: Login, name: 'Login' },
+  { path: '../t/:tcode', name: 'Webindex' },
   {
     path: '/home',
     component: Home,
@@ -94,6 +96,7 @@ const routes = [
     path: '/home',
     component: Home,
     children: [
+      { path: 'users/inlist', component: usersInlist, name: 'usersInlist', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/list', component: usersList, name: 'usersList', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/add', component: usersAdd, name: 'usersAdd', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/edit/:id', component: usersEdit, name: 'usersEdit', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }}
