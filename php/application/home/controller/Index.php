@@ -3,7 +3,7 @@ namespace app\home\controller;
 use app\common\controller\Common;
 use think\Db;
 use think\Request;
-use app\common\model\User;
+use app\common\model;
 
 class Index extends Common
 {
@@ -233,6 +233,7 @@ class Index extends Common
         $uid=is_login();
         if (!$uid) {
             $this->redirect('home/Index/index');
+            return false;
         }
         return view('tips');
     }
@@ -241,7 +242,36 @@ class Index extends Common
         $uid=is_login();
         if (!$uid) {
             $this->redirect('home/Index/index');
+            return false;
         }
+        if(Request::instance()->isPost()) {
+            //session 防刷数据
+            $param = $this->param;
+            $postid      = $param['postid'];
+            $skey='platform_click';
+            $c=session($skey);
+            if($c && $c['last_time']>0 && $c['postid']==$postid){
+                //计算超时时间 1509545004  10分钟内有效
+                if(time()-$c['last_time']<600){
+                    return resultArray(['error' => '点击在10分钟内记录一次']);
+                }else{
+                    session($skey,null);
+                }
+            }
+            //写入日志数据
+            $postlogModel = model('Postlog');
+            //写入日志 校验时间
+            $plogid=$postlogModel->add($uid,$postid);
+            if (!$plogid) {
+                return resultArray(['error' => $postlogModel->getError()]);
+            }
+            session($skey,array('postid'=>$postid, 'last_time' => time()));
+            return resultArray(['data' => '日志写入成功']);
+        }
+        $postModel = model('Post');
+//        $keywords = empty($param['keywords'])? $param['keywords']: '';
+        $data = $postModel->getDataList(null);
+        $this->assign('postlist',$data);
         return view('platform');
     }
 

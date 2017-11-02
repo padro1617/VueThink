@@ -25,72 +25,30 @@
 
 		<section class="platform-list">
 			<ul class="item">
+				<?php for ($x=0; $x<=count($postlist); $x++) { ?>
 				<li>
 					<div class="top">
 						<div class="left">
-							<div class="icon"><img src="/public/static/images/icon-project.jpg"></div>
-							<div class="name">用钱宝</div>
+							<div class="icon"><img src="{$postlist[$x]['logo']}" alt="logo"></div>
+							<div class="name">{$postlist[$x]['name']}</div>
 						</div>
 						<div class="right">
-							<a href="#">立即申请</a>
+							<a href="{$postlist[$x]['squrl']}" data-pid="{$postlist[$x]['id']}" target="_blank" class="aclick">立即申请</a>
 						</div>
 					</div>
 					<div class="bottom">
 						<div class="left">
-							<div class="money">5000</div>
+							<div class="money">{$postlist[$x]['maxmoney']}</div>
 							<div class="tips">预估额度（元）</div>
 						</div>
 						<div class="right">
-							<span>1</span>天放款<br>
-							日费率<span>0.5</span>%<br>
-							贷款期限<span>7~30</span>天
+							<span>{$postlist[$x]['maxmoney']}</span>天放款<br>
+							日费率<span>{$postlist[$x]['maxmoney']}</span>%<br>
+							贷款期限<span>{$postlist[$x]['maxmoney']}</span>天
 						</div>
 					</div>
 				</li>
-				<li>
-						<div class="top">
-							<div class="left">
-								<div class="icon"><img src="/public/static/images/icon-project.jpg"></div>
-								<div class="name">用钱宝</div>
-							</div>
-							<div class="right">
-								<a href="#">立即申请</a>
-							</div>
-						</div>
-						<div class="bottom">
-							<div class="left">
-								<div class="money">5000</div>
-								<div class="tips">预估额度（元）</div>
-							</div>
-							<div class="right">
-								<span>1</span>天放款<br>
-								日费率<span>0.5</span>%<br>
-								贷款期限<span>7~30</span>天
-							</div>
-						</div>
-					</li>
-					<li>
-							<div class="top">
-								<div class="left">
-									<div class="icon"><img src="/public/static/images/icon-project.jpg"></div>
-									<div class="name">用钱宝</div>
-								</div>
-								<div class="right">
-									<a href="#">立即申请</a>
-								</div>
-							</div>
-							<div class="bottom">
-								<div class="left">
-									<div class="money">5000</div>
-									<div class="tips">预估额度（元）</div>
-								</div>
-								<div class="right">
-									<span>1</span>天放款<br>
-									日费率<span>0.5</span>%<br>
-									贷款期限<span>7~30</span>天
-								</div>
-							</div>
-						</li>
+				<?php } ?>
 			</ul>
 		</section>
 
@@ -98,8 +56,24 @@
 		
         {/block}
 		
-				{block name="bodyjs"}
+	{block name="bodyjs"}
 
 	<script type="text/javascript" src="/public/static/js/fastclick.js"></script>
 	<script type="text/javascript" src="/public/static/js/index.js"></script>
+<script>
+	$(function(){
+		$('.aclick').click(function(){
+			//记录日志
+			var _postid=$(this).data('pid');
+			console.log(_postid);
+			if(!_postid){
+				console.log('未能记录点击数据');
+				return false;
+			}
+			$.post('/platform',{postid:_postid},function(d){
+
+			});
+		});
+	});
+</script>
 	{/block}
