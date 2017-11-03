@@ -159,20 +159,20 @@ class User extends Common
 			$this->error = '暂无此数据';
 			return false;
 		}
-		if (empty($param['groups'])) {
-			$this->error = '请至少勾选一个用户组';
-			return false;
-		}
+//		if (empty($param['groups'])) {
+//			$this->error = '请至少勾选一个用户组';
+//			return false;
+//		}
 		$this->startTrans();
 
 		try {
-			Db::name('admin_access')->where('user_id', $id)->delete();
-			foreach ($param['groups'] as $k => $v) {
-				$userGroup['user_id'] = $id;
-				$userGroup['group_id'] = $v;
-				$userGroups[] = $userGroup;
-			}
-			Db::name('admin_access')->insertAll($userGroups);
+//			Db::name('admin_access')->where('user_id', $id)->delete();
+//			foreach ($param['groups'] as $k => $v) {
+//				$userGroup['user_id'] = $id;
+//				$userGroup['group_id'] = $v;
+//				$userGroups[] = $userGroup;
+//			}
+//			Db::name('admin_access')->insertAll($userGroups);
 
 			if (!empty($param['password'])) {
 				$param['password'] = user_md5($param['password']);
@@ -183,7 +183,7 @@ class User extends Common
 
 		} catch(\Exception $e) {
 			$this->rollback();
-			$this->error = '编辑失败';
+			$this->error = '操作失败';
 			return false;
 		}
 	}

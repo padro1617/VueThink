@@ -58,7 +58,7 @@ class Index extends Common
                 if(!empty($tcode) && $tcode!='0'){
                     //查询推广员的ID
                     $t_userinfo=$userModel->where(array('tcode'=>$tcode))->find();
-                    if($userinfo!=Null) {
+                    if($t_userinfo!=Null) {
                         $tuid=$t_userinfo['id'];
                     }
                 }
@@ -115,7 +115,7 @@ class Index extends Common
                 return resultArray(['error' => '手机号不能为空！']);
             }
             if(!empty(get_phonecode($phone))){
-                return resultArray(['data' => "30分钟有效"]);
+                return resultArray(['data' => "30分钟有效,已发送过了哦"]);
             }
             //设置短信验证码
             $timestr=(string)time();
@@ -138,7 +138,7 @@ class Index extends Common
                     //这是短信码session
                     set_phonecode($phone,$phonecode);
 //                    return resultArray(['data' => "短信发送成功,短信ID：" . $result['result']['sid']]);
-                    return resultArray(['error' => "发送成功"]);
+                    return resultArray(['data' => "发送成功"]);
                     //echo "短信发送成功,短信ID：" . $result['result']['sid'];
                 } else {
                     //状态非0，说明失败

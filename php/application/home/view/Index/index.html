@@ -17,7 +17,7 @@
 		<section class="regedit-form">
 			<div class="item">
 				<span class="icon phone"></span>
-				<input type="text" class="text j-phone" value="13527293425" name="t2" valtype="MOBILE" msg="<font color=red>*</font>手机格式不正确" placeholder="请输入手机号码">
+				<input type="text" class="text j-phone" name="t2" valtype="MOBILE" msg="<font color=red>*</font>手机格式不正确" placeholder="请输入手机号码">
 			</div>
 			<div class="item">
 				<span class="icon pass"></span>
@@ -69,6 +69,7 @@
 			$.post('/smsapi',{phone:_phone},function(d){
 				if(d && d.code==200){
 					//发送成功
+					alert(d.data);
 					$('.j-code').focus();
 					$('.get-code').html(d.data).css("color","green");
 				}else{

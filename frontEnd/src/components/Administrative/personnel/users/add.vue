@@ -121,7 +121,7 @@
         })
       },
       getAllGroups() {
-        this.apiGet('admin/groups').then((res) => {
+        this.apiGet('admin/posts').then((res) => {
           this.handelResponse(res, (data) => {
             this.groupOptions = data
           })

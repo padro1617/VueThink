@@ -15,20 +15,20 @@
 			type="selection"
 			width="40">
 			</el-table-column>
-			<el-table-column
-			label="姓名"
-			prop="realname"
-			width="100">
-			</el-table-column>
+            <el-table-column
+                    prop="phone"
+                    label="注册手机"
+                    width="150">
+            </el-table-column>
             <el-table-column
                     prop="trealname"
-                    label="推广员"
+                    label="来自"
                     width="100">
             </el-table-column>
             <el-table-column
-                    prop="phone"
-                    label="手机"
-                    width="150">
+                    label="姓名"
+                    prop="realname"
+                    width="100">
             </el-table-column>
             <el-table-column
                     prop="idcard"
@@ -64,11 +64,6 @@
 			width="250">
         <template scope="scope">
           <div>
-            <span>
-              <router-link :to="{ name: 'Webindex', params: { tcode: scope.row.tcode  }}" class="btn-link el-button el-button--success is-plain" title="右键复制链接" target="_blank">
-                  右键复制链接
-              </router-link>
-            </span>
             <span>
               <router-link :to="{ name: 'usersEdit', params: { id: scope.row.id }}" class="btn-link edit-btn">
             编辑
