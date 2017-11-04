@@ -10,6 +10,18 @@ use app\common\model;
 
 class Users extends ApiCommon
 {
+    /**
+     * 数据分页导出
+     */
+    public function export()
+    {   
+        $userModel = model('User');
+        $param = $this->param;
+        $page = !empty($param['page']) ? $param['page']: 1;
+        $limit = !empty($param['limit']) ? $param['limit']: 15;    
+        $data = $userModel->gettj_userpostbypage($page, $limit);
+        return resultArray(['data' => $data]);
+    }
 
     public function index()
     {   

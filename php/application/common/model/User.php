@@ -33,8 +33,62 @@ class User extends Common
     public function groups()
     {
         return $this->belongsToMany('group', '__ADMIN_ACCESS__', 'group_id', 'user_id');
-    }
+	}
+	/**
+	 *  $page 默认为1  -1 代表导出 
+	 *  $limit 每页显示数量 如果是导出，为导出条数（尽量设置最大值）
+	 * https://www.kancloud.cn/manual/thinkphp5/160351
+	 */
+	public function gettj_userpostbypage($page, $limit){
+		//调用存储过程
+		//gettj_userpostbypage
+		// $data = Db::query('call sp_query(:page,:limit)',['page'=>$page,'limit'=>$limit]);
+		//$data=Db::query("call gettj_userpostbypage(1,2)");//".$page.",".$limit."
+		$rootpath=str_replace('application/common/model/User.php','',str_replace('\\', '/', __FILE__));
+		$database =include $rootpath.'/config/database.php';
+		//http://www.runoob.com/php/php-pdo.html
+		 $dsn = 'mysql:dbname='.$database['database'].';host='.$database['hostname'];  
+		 $user = $database['username'];  
+		 $password = $database['password'];  
+		
+		//  $page = '1';  
+		//  $limit = '123'; 
+		 try {  
+			$dbCon = new \PDO($dsn, $user, $password);  
+		 } catch (PDOException $e) {  
+			print 'Connection failed: '.$e->getMessage();  
+			exit;  
+		 }  
+		 $xp_userlogon = $dbCon->prepare('call gettj_userpostbypage(:_pageindex,:_pagelimit)');  
+		 $xp_userlogon->bindParam(':_pageindex',  $page);
+		 $xp_userlogon->bindParam(':_pagelimit',  $limit); 
+		 $xp_userlogon->execute();  
+		 $uCol = $xp_userlogon->columnCount();  
+		 //echo $uCol."<br>";  
+		 $resultarray=[];
+		 while($row = $xp_userlogon->fetch()){  
+		  for( $i=0; $i<$uCol; $i++ )  
+			unset($row[$i]);
+		   //print $row[$i]." ";  
+			array_push($resultarray,$row);
+			//var_dump($row);
+		  //print "<br>";  
+		 }
+		 $map=[];
+		$map['user.tuid'] = array('gt', -1);
+		// 默认除去超级管理员
+		$map['user.id'] = array('gt', 10);
+		$map['user.status'] = array('eq', 1);
+		$dataCount = $this->alias('user')->where($map)->count('id');
 
+		$data['list'] = $resultarray;
+		$data['dataCount'] = $dataCount;
+		
+		return $data;
+		//echo json_encode( $resultarray);
+		//return  ['dataCount'=>1,			'list'=>$resultarray];
+//		return $data;
+	}
     /**
      * [getDataList 列表]
      * @AuthorHTL

@@ -17,6 +17,7 @@ import structuresEdit from './components/Administrative/structures/structures/ed
 import groupsList from './components/Administrative/structures/groups/list.vue'
 import groupsAdd from './components/Administrative/structures/groups/add.vue'
 import groupsEdit from './components/Administrative/structures/groups/edit.vue'
+import usersTjlist from './components/Administrative/personnel/users/tjlist.vue'
 import usersInlist from './components/Administrative/personnel/users/inlist.vue'
 import usersList from './components/Administrative/personnel/users/list.vue'
 import usersAdd from './components/Administrative/personnel/users/add.vue'
@@ -96,6 +97,7 @@ const routes = [
     path: '/home',
     component: Home,
     children: [
+      { path: 'users/tjlist', component: usersTjlist, name: 'usersTjlist', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/inlist', component: usersInlist, name: 'usersInlist', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/list', component: usersList, name: 'usersList', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},
       { path: 'users/add', component: usersAdd, name: 'usersAdd', meta: { hideLeft: false, module: 'Administrative', menu: 'users' }},

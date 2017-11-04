@@ -12,12 +12,12 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 // define the different HOST between development and production environment
-//var DEV_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8082/')
-//var PUB_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8082/')
+// var DEV_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8082/')
+// var PUB_HOST = JSON.stringify('http://hjhh.yunwucm.dev.com:8082/')
 
 //http://padro.tunnel.qydev.com
-var DEV_HOST = JSON.stringify('http://padro.tunnel.qydev.com/')
-var PUB_HOST = JSON.stringify('http://padro.tunnel.qydev.com/')
+var DEV_HOST = JSON.stringify('http://xbxj.maoxiaowei.com/')
+var PUB_HOST = JSON.stringify('http://xbxj.maoxiaowei.com/')
 module.exports = {
   entry: {
     app: './src/main.js'
@@ -27,9 +27,9 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
-  eslint: {
-    configFile: './.eslintrc.json'
-  },
+  // eslint: {
+  //   configFile: './.eslintrc.json'
+  // },
   plugins: [
     new webpack.DefinePlugin({
       HOST: process.env.NODE_ENV === 'production' ? PUB_HOST : DEV_HOST
@@ -50,16 +50,16 @@ module.exports = {
   },
   module: {
     preLoaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-      },
-      {
-        test: /\.vue$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-      }
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: 'eslint'
+      // },
+      // {
+      //   test: /\.vue$/,
+      //   exclude: /node_modules/,
+      //   loader: 'eslint'
+      // }
     ],
     loaders: [
       {

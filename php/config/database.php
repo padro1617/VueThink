@@ -45,4 +45,7 @@ return [
     'sql_explain'    => false,
     // 时间字段是否自动格式化输出
     'datetime_format' => false,
+    // 'options'   => array(
+    //     PDO::ATTR_EMULATE_PREPARES => true
+    // ),
 ];
