@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.53)
-# Date: 2017-11-03 14:21:38
+# Date: 2017-11-04 11:07:25
 # Generator: MySQL-Front 5.3  (Build 4.234)
 
 /*!40101 SET NAMES utf8 */;
@@ -56,13 +56,13 @@ CREATE TABLE `oa_admin_menu` (
   `module` varchar(50) DEFAULT NULL,
   `menu` varchar(50) DEFAULT NULL COMMENT '三级菜单吗',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COMMENT='【配置】后台菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COMMENT='【配置】后台菜单表';
 
 #
 # Data for table "oa_admin_menu"
 #
 
-INSERT INTO `oa_admin_menu` VALUES (52,0,'管理','','',1,0,1,59,'Administrative',''),(53,52,'系统配置','','',1,0,1,61,'Administrative',''),(54,53,'菜单管理','/home/menu/list','',1,0,1,21,'Administrative','menu'),(55,53,'系统参数','/home/config/add','',1,0,1,29,'Administrative','systemConfig'),(56,53,'权限规则','/home/rule/list','',1,0,1,13,'Administrative','rule'),(57,52,'组织架构','','',1,0,1,63,'Administrative',''),(58,57,'平台管理','/home/position/list','',1,0,1,31,'Administrative','position'),(59,57,'部门管理','/home/structures/list','',1,0,1,39,'Administrative','structures'),(60,57,'用户组管理','/home/groups/list','',1,0,1,47,'Administrative','groups'),(61,52,'成员架构','','',1,0,1,62,'Administrative',''),(62,61,'推广员管理','/home/users/list','',1,0,1,55,'Administrative','users'),(64,61,'注册用户管理','/home/users/inlist','',2,2,1,54,'Administrative','users');
+INSERT INTO `oa_admin_menu` VALUES (52,0,'管理','','',1,0,1,59,'Administrative',''),(53,52,'系统配置','','',1,0,1,61,'Administrative',''),(54,53,'菜单管理','/home/menu/list','',1,0,1,21,'Administrative','menu'),(55,53,'系统参数','/home/config/add','',1,0,1,29,'Administrative','systemConfig'),(56,53,'权限规则','/home/rule/list','',1,0,1,13,'Administrative','rule'),(57,52,'组织架构','','',1,0,1,63,'Administrative',''),(58,57,'平台管理','/home/position/list','',1,0,1,31,'Administrative','position'),(59,57,'部门管理','/home/structures/list','',1,0,1,39,'Administrative','structures'),(60,57,'用户组管理','/home/groups/list','',1,0,1,47,'Administrative','groups'),(61,52,'成员架构','','',1,0,1,62,'Administrative',''),(62,61,'推广员管理','/home/users/list','',1,0,1,55,'Administrative','users'),(64,61,'注册用户管理','/home/users/inlist','',2,2,1,54,'Administrative','users'),(65,61,'用户统计导出','/home/users/tjlist','',1,4,1,55,'Administrative','users');
 
 #
 # Structure for table "oa_admin_post"
@@ -81,13 +81,13 @@ CREATE TABLE `oa_admin_post` (
   `status` tinyint(5) DEFAULT '1' COMMENT '状态1启用,0禁用',
   `squrl` varchar(255) NOT NULL DEFAULT '' COMMENT '申请链接',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='岗位表';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='岗位表';
 
 #
 # Data for table "oa_admin_post"
 #
 
-INSERT INTO `oa_admin_post` VALUES (33,'平安','http://passport.onethink.cn/Avatar/000/000/00/03/80_80.gif',1,7,'0.5','1~7','',1509630485,1,'http://padro.tunnel.qydev.com');
+INSERT INTO `oa_admin_post` VALUES (33,'平安','http://passport.onethink.cn/Avatar/000/000/00/03/80_80.gif',1,7,'0.5','1~7','',1509630485,1,'http://padro.tunnel.qydev.com'),(34,'快乐','',0,0,'','',NULL,NULL,1,'');
 
 #
 # Structure for table "oa_admin_postlog"
@@ -106,7 +106,7 @@ CREATE TABLE `oa_admin_postlog` (
 # Data for table "oa_admin_postlog"
 #
 
-INSERT INTO `oa_admin_postlog` VALUES (1,5,7,'2017-11-02 10:19:22',0),(2,5,7,'2017-11-02 10:37:26',1509590246),(3,6,7,'2017-11-02 10:39:07',1509590347),(4,5,7,'2017-11-02 10:39:19',1509590359),(5,6,7,'2017-11-02 10:39:37',1509590377),(6,5,7,'2017-11-02 10:43:57',1509590637),(7,6,7,'2017-11-02 10:45:33',1509590733),(8,5,7,'2017-11-02 10:49:35',1509590975),(9,6,7,'2017-11-02 10:50:20',1509591020),(10,5,7,'2017-11-02 11:01:04',1509591664),(11,33,13,'2017-11-03 13:10:21',1509685821),(12,33,15,'2017-11-03 14:05:51',1509689151);
+INSERT INTO `oa_admin_postlog` VALUES (1,34,7,'2017-11-02 10:19:22',0),(2,33,7,'2017-11-02 10:37:26',1509590246),(3,34,7,'2017-11-02 10:39:07',1509590347),(4,34,7,'2017-11-02 10:39:19',1509590359),(5,33,7,'2017-11-02 10:39:37',1509590377),(6,33,7,'2017-11-02 10:43:57',1509590637),(7,34,7,'2017-11-02 10:45:33',1509590733),(8,34,7,'2017-11-02 10:49:35',1509590975),(9,34,7,'2017-11-02 10:50:20',1509591020),(10,33,7,'2017-11-02 11:01:04',1509591664),(11,33,13,'2017-11-03 13:10:21',1509685821),(12,33,15,'2017-11-03 14:05:51',1509689151);
 
 #
 # Structure for table "oa_admin_rule"
@@ -166,13 +166,13 @@ CREATE TABLE `oa_admin_user` (
   `create_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_phone_unique` (`phone`) COMMENT '电话号码唯一'
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "oa_admin_user"
 #
 
-INSERT INTO `oa_admin_user` VALUES (0,'来自网络','不可以删除','11111111111','','','','','来自网络','5',0,1,1487217060),(1,'admin_padro','d93a5def7511da3d0f2d171d9c344e91','12527293425','','','','','超级管理员','1',0,1,NULL),(2,'admin','d93a5def7511da3d0f2d171d9c344e91','13524262428','管理员','','','','管理员','1',0,1,1509374223),(3,'admin2','0144712dd81be0c3d9724f5e56ce6685','13527293422','管理员','','','','管理员','',0,1,1509543592),(6,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293426','','','','','','',0,1,1509549125),(7,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293427','','','','','','',0,1,1509549713),(11,'推广员','d93a5def7511da3d0f2d171d9c344e91','13524262425','aaab','','','','推广A','abc',-1,1,1509628145),(12,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13627293425','','','','','','',0,1,1509669220),(13,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13824128322','','','','','','',0,1,1509685709),(14,'推广员','d93a5def7511da3d0f2d171d9c344e91','13252525252','aaa','','','','小刘','111',-1,1,1509688702),(15,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13727293425','','362429199011054251','6228480402564890018','13824128322','短短','',0,1,1509688848),(16,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293425','','','','','','',14,1,1509689572);
+INSERT INTO `oa_admin_user` VALUES (0,'来自网络','不可以删除','11111111111','','','','','来自网络','',0,1,1487217060),(1,'admin_padro','d93a5def7511da3d0f2d171d9c344e91','12527293425','','','','','超级管理员','1',0,1,NULL),(2,'admin','d93a5def7511da3d0f2d171d9c344e91','13524262428','管理员','','','','管理员','1',0,1,1509374223),(3,'admin2','0144712dd81be0c3d9724f5e56ce6685','13527293422','管理员','','','','管理员','',0,1,1509543592),(6,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293426','','','','','','',0,1,1509549125),(7,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293427','','','','','','',0,1,1509549713),(11,'推广员','d93a5def7511da3d0f2d171d9c344e91','13524262425','aaab','','','','推广A','abc',-1,1,1509628145),(12,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13627293425','','','','','','',0,1,1509669220),(13,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13824128322','','','','','','',0,1,1509685709),(14,'推广员','d93a5def7511da3d0f2d171d9c344e91','13252525252','aaa','','','','小刘','111',-1,1,1509688702),(15,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13727293425','','362429199011054251','6228480402564890018','13824128322','短短','',0,1,1509688848),(16,'注册用户','0144712dd81be0c3d9724f5e56ce6685','13527293425','','','','','','',14,1,1509689572),(17,NULL,NULL,'1','','','','','','',0,0,0),(18,NULL,NULL,'2','','','','','','',0,0,0),(19,NULL,NULL,'3','','','','','','',0,0,0),(20,NULL,NULL,'4','','','','','','',0,0,0),(21,NULL,NULL,'5','','','','','','',0,0,0),(22,NULL,NULL,'6','','','','','','',0,0,0),(23,NULL,NULL,'7','','','','','','',0,0,0),(24,NULL,NULL,'8','','','','','','',0,0,0),(25,NULL,NULL,'9','','','','','','',0,0,0),(26,NULL,NULL,'10','','','','','','',0,0,0),(27,NULL,NULL,'11','','','','','','',0,0,0),(28,NULL,NULL,'12','','','','','','',0,0,0),(29,NULL,'13','13','','','','','','',0,0,0),(30,NULL,NULL,'14','','','','','','',0,0,0),(31,NULL,NULL,'15','','','','','','',0,0,0),(32,NULL,NULL,'16','','','','','','',0,0,0),(33,NULL,NULL,'17','','','','','','',0,0,0),(34,NULL,NULL,'18','','','','','','',0,0,0),(35,NULL,NULL,'19','','','','','','',0,0,0),(36,NULL,NULL,'20','','','','','','',0,0,0);
 
 #
 # Structure for table "oa_system_config"
@@ -193,3 +193,126 @@ CREATE TABLE `oa_system_config` (
 #
 
 INSERT INTO `oa_system_config` VALUES (1,'SYSTEM_NAME','小白现金-管理员登录',0,1),(2,'SYSTEM_LOGO','https://cn.vuejs.org/images/logo.png',0,1),(3,'LOGIN_SESSION_VALID','1644',0,1),(4,'IDENTIFYING_CODE','0',0,1);
+
+#
+# Procedure "exportuserpost"
+#
+
+CREATE PROCEDURE `exportuserpost`(`_pageindex` int(11),`_pagesize` int(11))
+BEGIN
+     DECLARE t_calstr1 VARCHAR(800);
+     DECLARE t_calstr2 VARCHAR(800);
+     DECLARE t_sqlstr VARCHAR(800);
+     DECLARE t_postlogstr VARCHAR(800);
+     -- DECLARE t_postcount int default 0;
+     -- DECLARE t_i int default 0; -- 变量声明
+     DECLARE t_postid int default 0; -- 上一个post的id
+     DECLARE t_postname VARCHAR(100); -- 上一个post的name
+     -- select count(id) into t_postcount from oa_admin_post;
+     
+      -- 遍历数据结束标志
+      DECLARE done INT DEFAULT FALSE;
+      -- 游标
+      DECLARE cur CURSOR FOR 
+              SELECT id,name FROM oa_admin_post;
+      -- 将结束标志绑定到游标
+      DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+      -- 打开游标
+      OPEN cur;
+      
+      -- 开始循环
+      read_loop: LOOP
+        -- 提取游标里的数据，这里只有一个，多个的话也一样；
+        FETCH cur INTO t_postid,t_postname;
+        -- 声明结束的时候
+        IF done THEN
+          LEAVE read_loop;
+        END IF;
+        -- 这里做你想做的循环的事件        
+           SET t_postlogstr=CONCAT_WS(' ',t_postlogstr,",(select count(id) from oa_admin_postlog as p where p.user_id=u.id and p.postid=",t_postid,") as '",t_postname,"'");
+
+      END LOOP;
+      -- 关闭游标
+      CLOSE cur;
+
+     
+     SET t_calstr1=" select u.id,FROM_UNIXTIME(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.realname,u.phone,u.bankcard,ut.realname as trealname,ut.tcode ";
+     SET t_calstr2=" from oa_admin_user as u left join oa_admin_user as ut on ut.id=u.tuid where u.status=1 and u.id>10 and u.tuid>-1 ";
+     
+     SET t_sqlstr = CONCAT_WS(' ',t_calstr1,t_postlogstr,t_calstr2);
+     -- 打印
+     select t_sqlstr;
+     
+     SET @v_sql=t_sqlstr;   --  注意很重要，将连成成的字符串赋值给一个变量（可以之前没有定义，但要以@开头）
+     prepare stmt from @v_sql;  --  预处理需要执行的动态SQL，其中stmt是一个变量
+     EXECUTE stmt;      --  执行SQL语句
+     deallocate prepare stmt;     --  释放掉预处理段
+     
+END;
+
+#
+# Procedure "gettj_userpostbypage"
+#
+
+/*
+统计数 DEFINER=`root`@`localhost` PROCEDURE `gettj_userpostbypage`(`_pageindex` int(11),`_pagelimit` int(11))
+BEGIN
+     DECLARE t_calstr1 VARCHAR(800);
+     DECLARE t_calstr2 VARCHAR(800);
+     DECLARE t_sqlstr VARCHAR(800);
+     DECLARE t_pagestr VARCHAR(100); --  分页的代码
+     DECLARE t_postlogstr VARCHAR(800);
+     -- DECLARE t_postcount int default 0;
+     -- DECLARE t_i int default 0; -- 变量声明
+     DECLARE t_postid int default 0; -- 上一个post的id
+     DECLARE t_postname VARCHAR(100); -- 上一个post的name
+     -- select count(id) into t_postcount from oa_admin_post;
+     
+      -- 遍历数据结束标志
+      DECLARE done INT DEFAULT FALSE;
+      -- 游标
+      DECLARE cur CURSOR FOR 
+              SELECT id,name FROM oa_admin_post;
+      -- 将结束标志绑定到游标
+      DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+      -- 打开游标
+      OPEN cur;
+      
+      -- 开始循环
+      read_loop: LOOP
+        -- 提取游标里的数据，这里只有一个，多个的话也一样；
+        FETCH cur INTO t_postid,t_postname;
+        -- 声明结束的时候
+        IF done THEN
+          LEAVE read_loop;
+        END IF;
+        -- 这里做你想做的循环的事件        
+           SET t_postlogstr=CONCAT_WS(' ',t_postlogstr,",(select count(id) from oa_admin_postlog as p where p.user_id=u.id and p.postid=",t_postid,") as '",t_postname,"'");
+
+      END LOOP;
+      -- 关闭游标
+      CLOSE cur;
+
+     SET _pageindex=IFNULL(_pageindex,1);
+     SET _pagelimit=IFNULL(_pagelimit,15);
+     SET t_calstr1=" select u.phone as '注册手机',FROM_UNIXTIME(u.create_time,'%Y-%m-%d %H:%i:%s') as '注册时间',u.realname as '注册姓名',u.bankcard as '银行卡号',ut.realname as '推广员姓名',ut.tcode as '推广员专属ID'";
+     if _pageindex>-1 then 
+          -- 需要分页
+          -- SET t_calstr1=" select u.id,FROM_UNIXTIME(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.realname,u.phone,u.bankcard,ut.realname as trealname,ut.tcode ";
+          SET t_pagestr=CONCAT_WS(' ',' LIMIT',(_pageindex-1)*_pagelimit,',',_pagelimit);
+     else 
+          -- 不需要分页 导出的数据
+          SET t_calstr1=CONCAT_WS(' ',t_calstr1," ,u.id as '用户ID',u.idcard as '身份证号',u.bankphone as '银行预留手机号'");
+          SET t_pagestr=CONCAT_WS(' ',' LIMIT',_pagelimit);
+     end if;
+     SET t_calstr2=" from oa_admin_user as u left join oa_admin_user as ut on ut.id=u.tuid where u.status=1 and u.id>10 and u.tuid>-1 ORDER BY u.id ";
+     SET t_sqlstr = CONCAT_WS(' ',t_calstr1,t_postlogstr,t_calstr2,t_pagestr);
+     -- 打印
+     -- select t_sqlstr;
+     
+     SET @v_sql=t_sqlstr;   --  注意很重要，将连成成的字符串赋值给一个变量（可以之前没有定义，但要以@开头）
+     prepare stmt from @v_sql;  --  预处理需要执行的动态SQL，其中stmt是一个变量
+     EXECUTE stmt;      --  执行SQL语句
+     deallocate prepare stmt;     --  释放掉预处理段
+     
+END;
