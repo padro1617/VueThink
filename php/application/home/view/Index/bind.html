@@ -24,6 +24,10 @@
 			<input type="text" class="text j-bank" name="t1" valType="required" msg="<font color=red>*</font>银行卡号不能为空"  placeholder="请填写银行卡号">
 		</div>
 		<div class="item">
+			<span class="left">银行名</span>
+			<input type="text" class="text j-bankName" value="" disabled>
+		</div>
+		<div class="item">
 			<span class="left">预留手机号</span>
 			<input type="text" class="text j-phone"  name="t2" valtype="MOBILE" msg="<font color=red>*</font>手机格式不正确"  placeholder="请填写银行预留手机号">
 		</div>
@@ -81,6 +85,29 @@
 				}
 			});
 		});
+		
+		$('.j-bank').keydown(function(){
+			var val = $(this).val().substr(0, 4);
+			if(val == 4367 || val == 6227){
+				$('.j-bankName').val('建设银行')
+			}else if(val == 6228 || val == 9559 ){
+				$('.j-bankName').val('农业银行')
+			}else if(val == 6222 || val == 9558 ){
+				$('.j-bankName').val('工商银行')
+			}else if(val == 6221 ){
+				$('.j-bankName').val('邮政卡')
+			}else if(val == 6013 || val == 4563 || val == 6216 ){
+				$('.j-bankName').val('中国银行')
+			}else if(val == 6226   ){
+				$('.j-bankName').val('民生银行')
+			}else if(val == 6014 || val == 4055 || val == 6222 ){
+				$('.j-bankName').val('交通银行')
+			}else if(val == 622 ){
+				$('.j-bankName').val('中信银行')
+			}else{
+				$('.j-bankName').val('其他银行')
+			}
+		})
 		//$("#btn").bind("click", vali.subByJs);
 		$('.bind-btn').click(function () {
 			var _phone = $('.j-phone').val();
@@ -89,6 +116,13 @@
 			var _name = $('.j-name').val();
 			var _code = $('.j-code').val();
 
+			var regex = /^\d{16}|\d{19}$/;
+			
+            if (!regex.test(_bank)) {  
+				alert('请输入正确的银行卡')
+				return;
+			}  
+			
 			if(!_phone || !_card || !_bank || !_name || !_code){
 				alert('请完整填写所有信息！')
 				return;
@@ -104,6 +138,7 @@
 				$('.j-phone').focus();
 				return false;
 			}
+
 			$.post('/bind',{
 				bankphone:_phone,
 				idcard:_card,
