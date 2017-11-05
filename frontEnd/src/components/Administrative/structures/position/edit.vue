@@ -22,10 +22,10 @@
       <el-form-item label="预估额度" prop="maxmoney">
         <el-input v-model.trim="form.maxmoney" class="h-40 w-200"></el-input>
       </el-form-item>
-      <el-form-item label="放贷天数" prop="fddays">
+      <el-form-item label="放贷小时" prop="fddays">
         <el-input v-model.trim="form.fddays" class="h-40 w-200"></el-input>
       </el-form-item>
-      <el-form-item label="日费率" prop="flday">
+      <el-form-item label="日利息" prop="flday">
         <el-input v-model.trim="form.flday" class="h-40 w-200"></el-input>
       </el-form-item>
       <el-form-item label="贷款期限" prop="limitday">

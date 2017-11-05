@@ -102,8 +102,9 @@ class User extends Common
 	{
 		$map = [];
 		if ($keywords) {
-			$map['username|realname'] = ['like', '%'.$keywords.'%'];
+			$map['user.username|user.realname'] = ['like', '%'.$keywords.'%'];
 		}
+		$map['user.status'] = array('eq', 1);
 		if($tuid=='-1'){
 			$map['user.tuid'] = array('eq', $tuid);
 		}else{

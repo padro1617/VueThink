@@ -61,5 +61,5 @@ return [
 	'admin/posts/enables' => ['admin/posts/enables', ['method' => 'POST|OPTIONS']],
 	
 	// MISS路由
-	'__miss__'  => '/admin',
+	// '__miss__'  => '/admin',
 ];
