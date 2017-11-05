@@ -130,6 +130,7 @@
                 this.firsttableData=_data.list[0]
               }
               console.log('完成了')
+              this.handelResponse(res, (data) => {})
           }else{
               this.handelResponse(res, (data) => {
               console.log('data',data)
