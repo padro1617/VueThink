@@ -66,7 +66,7 @@
 				$('.j-phone').focus();
 				return false;
 			}
-			$.post('/smsapi',{phone:_phone},function(d){
+			$.post('/smsapi',{phone:_phone,codetype:'login'},function(d){
 				if(d && d.code==200){
 					//发送成功
 					alert(d.data);
@@ -96,7 +96,7 @@
 			}
 			//获取推广码 ?t=100
 			var _tcode='{$tcode}';
-			$.post('/',{phone:_phone,code:_code,tcode:_tcode},function(d){
+			$.post('/',{phone:_phone,code:_code,tcode:_tcode,codetype:'login'},function(d){
 				if(d && d.code==200){
 					//发送成功 成功
 					location.href = d.data;// '{:url("home/index/limit")}'

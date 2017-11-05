@@ -35,6 +35,7 @@ class Index extends Common
             $param = $this->param;
             $phone = $param['phone'];
             $code = $param['code'];
+            $codetype = $param['codetype'];//'login';
             $time = $this->request->time();
             if($phone==''){
                 return resultArray(['error' => '手机号不能为空！']);
@@ -43,13 +44,14 @@ class Index extends Common
                 return resultArray(['error' => '短信验证码不能为空！']);
             }
             //获取短信验证码内容
-            $_code =get_phonecode($phone);
+            $_code =get_phonecode($phone.'_'.$codetype);
             if (empty($_code)) {
                 return resultArray(['error' => '验证码已失效，请刷新页面，重新获取验证码！']);
             }
             if ($_code!=$code) {
                 return resultArray(['error' => '验证码错误！']);
             }
+            $bankcard='';
             $userinfo=$userModel->where(array('phone'=>$phone))->find();
             if($userinfo==Null){
                 //获取推广码
@@ -78,27 +80,40 @@ class Index extends Common
 //                return resultArray(['data' => '账号注册成功']);
             }else{
                 $resultuid=$userinfo['id'];
+                $bankcard=$userinfo['bankcard'];
                 if ($userinfo['status']==0) {
                     return resultArray(['error' => '该手机号已被拉黑，请联系管理员恢复！']);
                 }
             }
             //去除短信验证码
-            set_phonecode(null,null);
+            set_phonecode($phone.'_'.$codetype,null);
 
-            $auth = array('aid' => $resultuid, 'last_time' => $time);
+            $auth = array('aid' => $resultuid,'bankcard'=>$bankcard,'phone'=>$phone, 'last_time' => $time);
             //设置登录session
             session('ke_user_auth', $auth);
-            return resultArray(['data' => Url('home/Index/limit')]);
+            if($bankcard){
+                //已绑定过
+                return resultArray(['data' => Url('home/Index/platform')]);
+            }else{
+                return resultArray(['data' => Url('home/Index/limit')]);
+            }
             //return array('status' => 1, 'url' => Url('home/Index/limit'));
         }
-        if (is_login()) {
-            $rurl=get_redirect_url();
-            if ($rurl&&$rurl!='/') {
-                redirect($rurl);
-            }
-            else {
+        $sessionuser=is_login();
+        if ($sessionuser) {
+            if($sessionuser['bankcard']){
+                //已绑定过
+                $this->redirect('home/Index/platform');
+            }else{ 
                 $this->redirect('home/Index/limit');
             }
+            // $rurl=get_redirect_url();
+            // if ($rurl&&$rurl!='/') {
+            //     redirect($rurl);
+            // }
+            // else {
+            //     $this->redirect('home/Index/limit');
+            // }
         }
         $this->assign('tcode',$tcode);
         return view();
@@ -111,22 +126,27 @@ class Index extends Common
         if(Request::instance()->isPost()) {
             $param = $this->param;
             $phone = $param['phone'];
+            $codetype = $param['codetype'];            
             if($phone==''){
                 return resultArray(['error' => '手机号不能为空！']);
             }
-            if(!empty(get_phonecode($phone))){
+            if(!empty(get_phonecode($phone.'_'.$codetype))){
                 return resultArray(['data' => "30分钟有效,已发送过了哦"]);
+            }
+            $smstplid='50408';//【小白金服】您的验证码是#code#。请
+            if($codetype=='login'){
+                $smstplid='49300';//登陆的
             }
             //设置短信验证码
             $timestr=(string)time();
             $phonecode=substr($timestr , -4);
             //测试
-//            set_phonecode($phone,$phonecode);
+//            set_phonecode($phone.'_'.$codetype,$phonecode);
 //            return resultArray(['data' => "短信发送成功,短信ID：".$phonecode]);
             $sendUrl = 'http://v.juhe.cn/sms/send'; //短信接口的URL
             $smsConf = ['key'       => 'fd6c17a2cd2796ef45d05b2b655c14c8', //您申请的APPKEY
                         'mobile'    => $phone, //接受短信的用户手机号码
-                        'tpl_id'    => '49300', //您申请的短信模板ID，根据实际情况修改
+                        'tpl_id'    => $smstplid, //您申请的短信模板ID，根据实际情况修改
                         'tpl_value' => '#code#='.$phonecode //您设置的模板变量，根据实际情况修改 &#company#=聚合数据
             ];
             $content = juhecurl($sendUrl, $smsConf, 1); //请求发送短信
@@ -136,7 +156,7 @@ class Index extends Common
                 if ($error_code == 0) {
                     //状态为0，说明短信发送成功
                     //这是短信码session
-                    set_phonecode($phone,$phonecode);
+                    set_phonecode($phone.'_'.$codetype,$phonecode);
 //                    return resultArray(['data' => "短信发送成功,短信ID：" . $result['result']['sid']]);
                     return resultArray(['data' => "发送成功"]);
                     //echo "短信发送成功,短信ID：" . $result['result']['sid'];
@@ -159,18 +179,20 @@ class Index extends Common
      */
     public function limit()
     {
-        $uid=is_login();
-        if (!$uid) {
+        $sessionuser=is_login();
+        if (!$sessionuser) {
             $this->redirect('home/Index/index');
         }
         return view('limit');
     }
     //登出
     public  function logout(){
-        set_phonecode(null,null);
-        if(is_login()){
+        $sessionuser=is_login();
+        if ($sessionuser) {
             //去除短信验证码
             session('ke_user_auth',null);
+            set_phonecode($sessionuser['phone'].'_login',null);
+            set_phonecode($sessionuser['phone'].'_bind',null);
         }
         $this->redirect('/');
     }
@@ -181,10 +203,11 @@ class Index extends Common
      */
     public function bind()
     {
-        $uid=is_login();
-        if (!$uid) {
+        $sessionuser=is_login();
+        if (!$sessionuser) {
             $this->redirect('home/Index/index');
         }
+        $uid=$sessionuser['aid'];
         if(Request::instance()->isPost()) {
             //
             $userModel = model('User');
@@ -194,6 +217,7 @@ class Index extends Common
             $bankcard = $param['bankcard'];
             $truename = $param['truename'];
             $code      = $param['code'];
+            $codetype      =$param['codetype'];//'bind';// $param['codetype'];
             $time      = $this->request->time();
             if ($bankphone == '') {
                 return resultArray(['error' => '手机号不能为空！']);
@@ -202,7 +226,7 @@ class Index extends Common
                 return resultArray(['error' => '短信验证码不能为空！']);
             }
             //获取短信验证码内容
-            $_code = get_phonecode($bankphone);
+            $_code = get_phonecode($bankphone.'_'.$codetype);
             if (empty($_code)) {
                 return resultArray(['error' => '验证码已失效，请刷新页面，重新获取验证码！']);
             }
@@ -224,6 +248,11 @@ class Index extends Common
                 return resultArray(['error' => $userModel->getError()]);
             }
 //            return resultArray(['data' => '绑定成功']);
+            
+            $sessionuser['bankcard']=$bankcard;
+            $sessionuser['last_time'] =$time;
+            //更新session
+            session('ke_user_auth', $sessionuser);
             return resultArray(['data' => Url('home/Index/tips')]);
         }
         return view('bind');
@@ -231,20 +260,19 @@ class Index extends Common
 
     public function tips()
     {
-        $uid=is_login();
-        if (!$uid) {
+        $sessionuser=is_login();
+        if (!$sessionuser) {
             $this->redirect('home/Index/index');
-            return false;
         }
         return view('tips');
     }
     public function platform()
     {
-        $uid=is_login();
-        if (!$uid) {
+        $sessionuser=is_login();
+        if (!$sessionuser) {
             $this->redirect('home/Index/index');
-            return false;
         }
+        $uid=$sessionuser['aid'];
         if(Request::instance()->isPost()) {
             //session 防刷数据
             $param = $this->param;

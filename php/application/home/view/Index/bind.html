@@ -70,7 +70,7 @@
 				$('.j-phone').focus();
 				return false;
 			}
-			$.post('/smsapi',{phone:_phone},function(d){
+			$.post('/smsapi',{phone:_phone,codetype:'bind'},function(d){
 				if(d && d.code==200){
 					//发送成功
 					$('.j-code').focus();
@@ -109,7 +109,8 @@
 				idcard:_card,
 				bankcard:_bank,
 				truename:_name,
-				code:_code
+				code:_code,
+				codetype:'bind'
 			},function(d){
 				if(d && d.code==200){
 					//发送成功 成功

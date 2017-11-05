@@ -58,9 +58,10 @@ function is_login()
         return 0;
     }
     else {
-        return $user['aid'];
+        return $user;
     }
 }
+
 
 /**
  * 设置短信验证码

@@ -9,45 +9,47 @@
 {/block}
 {block name="content"}
 		
-		<section class="platform-title">
-			初审额度（元）<br><span>7,000.00</span>
-		</section>
+<section class="index-banner">
+	<img src="/public/static/images/paltform-title.jpg">
+	<div class="write">
+		<span class="middle">最高可借额度（元）</span><br>
+		<span class="big">7000.00</span><br>
+		<span class="small">借款金额和期限以实际审批为准</span>
+	</div>
+	<a href="#" class="link link-1">借款攻略</a>
+	<a href="#" class="link link-2">借款交流</a>
+</section>
 
-		<section class="platform-link">
-			<a href="#">借款攻略</a>
-			<a href="#">借款交流</a>
-		</section>
+<section class="platfor-notice">
+<img src="/public/static/images/icon-labo.png">
+<span>【优惠】10000元免费用一个月</span>
+</section>
 
-		<section class="platfor-notice">
-			<img src="/public/static/images/icon-labo.png">
-			<span>【优惠】10000元免费用一个月</span>
-		</section>
-
-		<section class="platform-list">
-			<ul class="item">
-				<?php for ($x=0; $x<=count($postlist); $x++) { ?>
-				<li>
-					<div class="top">
-						<div class="left">
-							<div class="icon"><img src="{$postlist[$x]['logo']}" alt="logo"></div>
-							<div class="name">{$postlist[$x]['name']}</div>
-						</div>
-						<div class="right">
-							<a href="{$postlist[$x]['squrl']}" data-pid="{$postlist[$x]['id']}" target="_blank" class="aclick">立即申请</a>
-						</div>
-					</div>
-					<div class="bottom">
-						<div class="left">
-							<div class="money">{$postlist[$x]['maxmoney']}</div>
-							<div class="tips">预估额度（元）</div>
-						</div>
-						<div class="right">
-							<span>{$postlist[$x]['maxmoney']}</span>天放款<br>
-							日费率<span>{$postlist[$x]['maxmoney']}</span>%<br>
-							贷款期限<span>{$postlist[$x]['maxmoney']}</span>天
-						</div>
-					</div>
-				</li>
+<section class="platform-list">
+<ul class="item">	
+	<?php for ($x=0; $x<=count($postlist); $x++) { ?>
+	<li>
+		<div class="top">
+			<div class="left">
+					<div class="icon"><img src="{$postlist[$x]['logo']}" alt="logo"></div>
+					<div class="name">{$postlist[$x]['name']}</div>
+			</div>
+			<div class="right">
+				<a href="{$postlist[$x]['squrl']}" data-pid="{$postlist[$x]['id']}" target="_blank" class="aclick">立即申请</a>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="left">
+				<div class="money">{$postlist[$x]['maxmoney']}</div>
+				<div class="tips">预估额度（元）</div>
+			</div>
+			<div class="right">
+				<span>{$postlist[$x]['maxmoney']}</span>天放款<br>
+				日费率<span>{$postlist[$x]['maxmoney']}</span>%<br>
+				贷款期限<span>{$postlist[$x]['maxmoney']}</span>天
+			</div>
+		</div>
+	</li>
 				<?php } ?>
 			</ul>
 		</section>

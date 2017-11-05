@@ -108,22 +108,31 @@ input[type=button], input[type=text] {
 .platform-title span{font-size:38px;}
 .platform-link{text-align: center; width: 100%;padding-bottom: 20px;float: left;}
 .platform-link a{width: 40%;margin: 0 5%; height: 40px;line-height: 40px; background: #f5902d;color: #fff; font-size: 16px; text-align: center;display: inline-block;float: left;border-radius: 10px;}
-.platfor-notice{width: 100%;height: 28px; line-height: 28px;background: rgba(255, 255, 255, 0.5); float: left; margin-bottom: 2px;padding-left:15px;color: #bfbfbf;}
+.platfor-notice{width: 100%;height: 28px; line-height: 28px;background: rgba(255, 255, 255, 0.5); float: left; margin-bottom: 2px;padding-left:15px;color: #bfbfbf; display: none;}
 .platfor-notice img{vertical-align: middle;margin-right: 5px;}
 .platform-list{width:100%;float: left}
 .platform-list ul{padding: 0px 0px 20px;}
-.platform-list ul li{width:100%;height: 120px; background: rgba(255, 255, 255, 0.5); margin-bottom: 10px; color: #434343;position: relative;}
+.platform-list ul li{width:100%;height: 120px; background: rgba(255, 255, 255, 1); margin-bottom: 10px; color: #434343;position: relative;}
 .platform-list ul li .top{width:100%;float: left;padding:5px 0 10px; }
 .platform-list ul li .top .left{float: left;padding-left:25px;}
 .platform-list ul li .top .left .icon{float: left; width: 30px; height: 30px; }
 .platform-list ul li .top .left .name{float: left; font-size: 20px; margin-left:5px; line-height: 30px; font-weight: bold;}
 .platform-list ul li .top .right{float: right;margin: 3px 10px;    position: absolute;right: 5px;top: 69px;}
-.platform-list ul li .top .right a{display: inline-block; padding: 5px 10px; color:#fff; border-top-left-radius: 25px;  border-bottom-left-radius: 25px; background: #f45c5b;}
+.platform-list ul li .top .right a{display: inline-block; padding: 5px 10px; color:#fff;  border:solid 1px #f45c5b; color: #f45c5b; border-radius: 5px;}
 .platform-list ul li .bottom{width:100%;float: left;}
 .platform-list ul li .bottom .left{float: left;padding-left:25px;border-right:solid 1px #2d2d2d; height: 60px;padding-right: 5%;margin-right: 5%; line-height: 28px;}
 .platform-list ul li .bottom .left .money{font-size: 24px;color:#f45c5b;padding-top:6px;}
 .platform-list ul li .bottom .right span{color:#f45c5b;}
 
+.index-banner{position:relative;color:#fff}
+.index-banner,.index-banner img{float:left;width:100%}
+.index-banner .write{position:absolute;top:10%;left:30px;}
+.index-banner .write .middle{font-size:0.350rem;}
+.index-banner .write .big{font-weight:700;font-size:1rem;}
+.index-banner .write .small{font-size:0.2rem;line-height: 30px;}
+.index-banner .link{text-align: center;padding:0.2rem 0;width:42%;border:1px solid #dedfdf;border-radius:20px;background:#7f7f7e;color:#dedfdf;float: left;position: absolute;font-size: 0.359rem;}
+.index-banner .link-1{left:5%;bottom:10px}
+.index-banner .link-2{right:5%;bottom:10px}
 
 
 @media screen and (min-width: 600px) { 
