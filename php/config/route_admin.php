@@ -16,6 +16,8 @@ return [
         'admin/posts'          =>'admin/posts',
     ],
 	// 统计分页 导出数据
+	'admin/users/export' => ['admin/base/export', ['method' => 'GET|POST|OPTIONS']],
+	// 统计分页 导出数据
 	'admin/base/export' => ['admin/base/export', ['method' => 'GET|POST|OPTIONS']],
 	// 【基础】登录
 	'admin/base/login' => ['admin/base/login', ['method' => 'POST|OPTIONS']],

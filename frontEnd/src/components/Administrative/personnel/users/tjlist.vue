@@ -14,25 +14,35 @@
 		</div>
 		<el-table
 		:data="tableData"
-		style="width: 100%"
-        @selection-change="selectItem">
+		style="width: 100%">
 
 			<!-- <el-table-column
 			type="selection"
 			width="40">
 			</el-table-column> -->
 
-			<el-table-column v-for="(value, key, index) in tableData[0]"
+		<el-table-column v-for="(value, key, index) in firsttableData"
       v-bind:key="index"
 			v-bind:label="key"
 			v-bind:prop="key"
       >
-			</el-table-column>
-<!-- 
+			</el-table-column> 
+	<!-- 
+            <el-table-column
+                    prop="phone"
+                    label="手机"
+                    width="150">
+            </el-table-column>
+            
 			<el-table-column
 			label="姓名"
 			prop="realname"
 			width="150">
+            <el-table-column
+                    prop="bankcard"
+                    label="银行卡号"
+                    width="150">
+            </el-table-column>
 			</el-table-column>
             <el-table-column
                     prop="trealname"
@@ -43,12 +53,11 @@
                     prop="tcode"
                     label="专属ID"
                     width="150">
-            </el-table-column>
+            </el-table-column>   
             <el-table-column
-                    prop="phone"
-                    label="手机"
-                    width="150">
-            </el-table-column> -->
+                    label="注册时间"
+                    prop="create_time">
+            </el-table-column>-->
 			<!--<el-table-column-->
 			<!--label="状态"-->
 			<!--width="80">-->
@@ -58,10 +67,7 @@
           <!--</div>-->
         <!--</template>-->
 			<!--</el-table-column>-->
-            <!-- <el-table-column
-                    label="注册时间"
-                    prop="create_time">
-            </el-table-column> -->
+         
 		</el-table>
 		<div class="pos-rel p-t-20">
 			<!--<btnGroup :selectedData="multipleSelection" :type="'users'"></btnGroup>-->
@@ -85,6 +91,7 @@
   export default {
     data() {
       return {
+        firsttableData: [],
         tableData: [],
         dataCount: null,
         currentPage: null,
@@ -97,32 +104,8 @@
       search() {
         router.push({ path: this.$route.path, query: { keywords: this.keywords, page: 1 }})
       },
-      selectItem(val) {
-        console.log(val)
-        this.multipleSelection = val
-      },
       handleCurrentChange(page) {
         router.push({ path: this.$route.path, query: { keywords: this.keywords, page: page }})
-      },
-      confirmDelete(item) {
-        this.$confirm('确认删除该用户?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          _g.openGlobalLoading()
-          this.apiDelete('admin/users/', item.id).then((res) => {
-            _g.closeGlobalLoading()
-            this.handelResponse(res, (data) => {
-              _g.toastMsg('success', '删除成功')
-              setTimeout(() => {
-                _g.shallowRefresh(this.$route.name)
-              }, 1500)
-            })
-          })
-        }).catch(() => {
-          // catch error
-        })
       },
       getAllUsers() {
         this.loading = true
@@ -134,11 +117,35 @@
             tuid: -1
           }
         }
-        this.apiGet('admin/base/export', data).then((res) => {
-          console.log('res = ', _g.j2s(res))
+        this.apiPost('admin/users/export', data).then((res) => {
+          // console.log('res ',res);
+          // console.log('typeof ',typeof res);
+          // console.log('_g.j2s(res) = ', _g.j2s(res))
+          // let _res= eval('(' + res + ')');
+          // let _data= _res.data;
+          // console.log('_res typeof ',typeof _res);
+          // if(_data){
+          //   this.tableData = _data.list
+          //   this.dataCount = _data.dataCount
+          //   if(_data.list && _data.list.length>0){
+          //     this.firsttableData=_data.list[0]
+          //   }
+          //   console.log('count ',this.dataCount)
+          //   console.log('第一个内容')
+          //   console.log(this.firsttableData)
+          // }else{
+          //   console.log('无数据');
+          // }
           this.handelResponse(res, (data) => {
+            console.log('data',data)
+            console.log('data-typeof',typeof data)
+            console.log(data)
             this.tableData = data.list
             this.dataCount = data.dataCount
+            if(data.list && data.list.length>0){
+              this.firsttableData=data.list[0]
+            }
+            console.log(this.firsttableData)
           })
         })
       },
@@ -163,6 +170,7 @@
         }
       },
       init() {
+        console.log('执行init tjlist')
         this.getKeywords()
         this.getCurrentPage()
         this.getAllUsers()
