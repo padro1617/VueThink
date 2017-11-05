@@ -133,6 +133,9 @@ class Index extends Common
             if(!empty(get_phonecode($phone.'_'.$codetype))){
                 return resultArray(['data' => "30分钟有效,已发送过了哦"]);
             }
+            if(!empty(get_phonecode($phone.'_login'))){
+                return resultArray(['data' => "30分钟有效,已发送过了哦"]);
+            }
             $smstplid='50408';//【小白金服】您的验证码是#code#。请
             if($codetype=='login'){
                 $smstplid='49300';//登陆的
