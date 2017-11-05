@@ -111,42 +111,38 @@
         this.loading = true
         const data = {
           params: {
-            keywords: this.keywords,
             page: this.currentPage,
-            limit: this.limit,
-            tuid: -1
+            limit: this.limit
           }
         }
-        this.apiPost('admin/users/export', data).then((res) => {
+        this.apiGet('admin/users/export', data).then((res) => {
           // console.log('res ',res);
           // console.log('typeof ',typeof res);
-          // console.log('_g.j2s(res) = ', _g.j2s(res))
-          // let _res= eval('(' + res + ')');
-          // let _data= _res.data;
-          // console.log('_res typeof ',typeof _res);
-          // if(_data){
-          //   this.tableData = _data.list
-          //   this.dataCount = _data.dataCount
-          //   if(_data.list && _data.list.length>0){
-          //     this.firsttableData=_data.list[0]
-          //   }
-          //   console.log('count ',this.dataCount)
-          //   console.log('第一个内容')
-          //   console.log(this.firsttableData)
-          // }else{
-          //   console.log('无数据');
-          // }
-          this.handelResponse(res, (data) => {
-            console.log('data',data)
-            console.log('data-typeof',typeof data)
-            console.log(data)
-            this.tableData = data.list
-            this.dataCount = data.dataCount
-            if(data.list && data.list.length>0){
-              this.firsttableData=data.list[0]
-            }
-            console.log(this.firsttableData)
-          })
+          console.log('_g.j2s(res) = ', _g.j2s(res))
+          if(typeof res == 'string'){
+            let _res= eval('(' + res + ')');
+            let _data= _res.data;
+            console.log('_res typeof ',typeof _res);
+            console.log('_data ',_data);
+              this.tableData = _data.list
+              this.dataCount = _data.dataCount
+              if(_data.list && _data.list.length>0){
+                this.firsttableData=_data.list[0]
+              }
+              console.log('完成了')
+          }else{
+              this.handelResponse(res, (data) => {
+              console.log('data',data)
+              console.log('data-typeof',typeof data)
+              console.log(data)
+              this.tableData = data.list
+              this.dataCount = data.dataCount
+              if(data.list && data.list.length>0){
+                this.firsttableData=data.list[0]
+              }
+              console.log(this.firsttableData)
+            })
+          }
         })
       },
       getCurrentPage() {

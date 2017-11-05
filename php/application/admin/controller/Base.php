@@ -14,16 +14,6 @@ use app\common\model;
 
 class Base extends Common
 {
-    
-    public function export()
-    {   
-        $userModel = model('User');
-        $param = $this->param;
-        $page = !empty($param['page']) ? $param['page']: 1;
-        $limit = !empty($param['limit']) ? $param['limit']: 15;    
-        $data = $userModel->gettj_userpostbypage($page, $limit);
-        return resultArray(['data' => $data]);
-    }
     public function login()
     {   
         $userModel = model('User');
