@@ -74,6 +74,7 @@ input[type=button], input[type=text] {
 .tip-yellowsimple  font{margin-right: 5px;}
 
 .regedit-title{float: left;width: 100%;}
+.regedit-title img{width:100%;}
 .regedit-form{padding: 30px 16% 50px;float: left;width: 100%;}
 .regedit-form .item{margin-bottom: 15px; border: solid 1px #fff; border-radius: 8px; margin-bottom:20px;height: 44px; width:100%; overflow: hidden;}
 .regedit-form .item span{width: 40px; height: 40px;float: left;}
