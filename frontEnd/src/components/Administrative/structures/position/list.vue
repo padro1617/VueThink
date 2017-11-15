@@ -99,7 +99,7 @@
         this.multipleSelection = val
       },
       confirmDelete(item) {
-        this.$confirm('确认删除该岗位?', '提示', {
+        this.$confirm('确认删除该平台信息?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
