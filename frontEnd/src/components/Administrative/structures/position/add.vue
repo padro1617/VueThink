@@ -20,7 +20,7 @@
               :action="uploadUrl"
               type="drag"
               limit="1"
-              on-exceed="onexceed"
+              :on-exceed="onexceed"
               :thumbnail-mode="true"
               :on-remove="handleRemove"
               :on-success="uploadSuccess"

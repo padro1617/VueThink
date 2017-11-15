@@ -128,14 +128,13 @@
             this.form.limitday = data.limitday
             this.form.squrl = data.squrl
             if (data.logo) {
-              let img = window.HOST + data.logo
+              let img = window.HOST+'/' + data.logo
               if(data.logo.indexOf('http')>-1){
                 img = data.logo
               }
               this.fileList[0] = { name: '图片', url: img ,status: 'finished'}
               //this.viewPic();
               // this.fileList.push({ name: '图片', url: img })
-              this.form.logo = img
             }
           })
         })
