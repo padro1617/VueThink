@@ -15,6 +15,7 @@ return [
         'admin/structures'	   =>'admin/structures',
         'admin/posts'          =>'admin/posts',
     ],
+	'Upload' => ['admin/Upload/index', ['method' => 'POST|OPTIONS']],
 	// 统计分页 导出数据
 	'admin/users/export' => ['admin/users/export', ['method' => 'GET|POST|OPTIONS']],
 	// 统计分页 导出数据

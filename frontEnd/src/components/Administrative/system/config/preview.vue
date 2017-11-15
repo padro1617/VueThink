@@ -7,6 +7,12 @@
 .box-shadow-none {
 	box-shadow: 0 1px 3px rgba(0,0,0,0);
 }
+
+.box-shadow-none img {
+	max-width:350px;
+	max-height:200px;
+  width:100%;
+}
 </style>
 <script>
   export default {

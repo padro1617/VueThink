@@ -15,23 +15,27 @@
 			</el-table-column>
 			<el-table-column
 			label="平台名称"
-			prop="name">
+			prop="name" width="195">
 			</el-table-column>
             <el-table-column
                     label="预估额度"
-                    prop="maxmoney">
+                    prop="maxmoney" 
+                    width="95">
             </el-table-column>
             <el-table-column
                     label="放贷天数"
-                    prop="fddays">
+                    prop="fddays"
+                    width="95">
             </el-table-column>
             <el-table-column
                     label="日费率"
-                    prop="flday">
+                    prop="flday"
+                    width="95">
             </el-table-column>
             <el-table-column
                     label="贷款期限"
-                    prop="limitday">
+                    prop="limitday"
+                    width="95">
             </el-table-column>
             <el-table-column
                     label="链接地址"

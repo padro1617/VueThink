@@ -13,14 +13,14 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 // define the different HOST between development and production environment
 
-var hosthttp=process.env.NODE_ENV === 'production' ? 'http://xbxj.maoxiaowei.com/' : 'http://hjhh.yunwucm.dev.com:8082/'
+var hosthttp=process.env.NODE_ENV === 'production' ? 'http://xbxj.maoxiaowei.com' : 'http://hjhh.yunwucm.dev.com:8082'
 // hosthttp='http://xbxj.maoxiaowei.com/' ;
 var DEV_HOST = JSON.stringify(hosthttp)
 var PUB_HOST = JSON.stringify(hosthttp)
 
 //http://padro.tunnel.qydev.com
-// var DEV_HOST = JSON.stringify('http://xbxj.maoxiaowei.com/')
-// var PUB_HOST = JSON.stringify('http://xbxj.maoxiaowei.com/')
+// var DEV_HOST = JSON.stringify('http://xbxj.maoxiaowei.com')
+// var PUB_HOST = JSON.stringify('http://xbxj.maoxiaowei.com')
 module.exports = {
   entry: {
     app: './src/main.js'
