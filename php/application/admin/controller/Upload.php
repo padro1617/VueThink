@@ -25,7 +25,7 @@ class Upload extends Controller
             
             $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . DS . 'uploads');
             if ($info) {
-                return resultArray(['data' =>  'public/uploads'. DS .$info->getSaveName()]);
+                return resultArray(['data' =>  'public\static\images\uploads'. DS .$info->getSaveName()]);
             }
             return resultArray(['error' =>  $file->getError()]);
     }
